@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AldoFerdii Solusi | Jasa Tugas & IT Support</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #ffffff;
+            --secondary-bg: #f8fafc;
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --border: #e2e8f0;
+            --card: #ffffff;
+            --accent: #10b981;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        .glass {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .badge {
+            background: #f1f5f9;
+            color: var(--text-main);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav.desktop-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; color: var(--text-main); text-decoration: none; }
+        .logo span { color: var(--primary); }
+
+        .nav-links { display: none; gap: 30px; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin: 24px 0;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -2px;
+        }
+
+        .hero p { color: var(--text-dim); max-width: 650px; margin: 0 auto 40px; font-size: 1.15rem; }
+
+        .btn-primary {
+            background: var(--text-main);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: #1e293b;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 18px 36px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary-bg);
+            border-color: var(--text-main);
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            margin-bottom: 40px;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            background: var(--text-main);
+            color: white;
+            border-color: var(--text-main);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            padding: 40px;
+            background: white;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card i { color: var(--primary); margin-bottom: 24px; }
+
+        .price-box {
+            background: var(--secondary-bg);
+            padding: 15px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            background: white;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 20px;
+        }
+
+        .mobile-nav a { color: var(--text-dim); text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 11px; font-weight: 600; }
+        .mobile-nav a.active { color: var(--primary); }
+
+        @media (min-width: 768px) {
+            .nav-links { display: flex; }
+            .mobile-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="desktop-nav">
+                <a href="#home" class="logo">Aldo<span>Ferdii.</span></a>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#layanan">Layanan</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--accent);">● ONLINE</span>
+                    <a href="https://wa.me/628975614300" class="btn-primary" style="padding: 10px 20px; font-size: 13px;">Order Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section class="hero" id="home">
+            <span class="badge">#1 Student Solutions in Bandung</span>
+            <h1>Tugas Beres, <br>Hidup Jadi Tenang.</h1>
+            <p>Solusi bantuan tugas sekolah, SMK, hingga kuliah. Dikerjakan profesional oleh mahasiswa Informatika dengan standar akademik tinggi (IPK 3.90).</p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <a href="#layanan" class="btn-primary">Lihat Layanan <i data-lucide="chevron-right"></i></a>
+                <a href="https://wa.me/628975614300" class="btn-outline">Konsultasi Gratis</a>
+            </div>
+        </section>
+
+        <section id="layanan" style="padding: 60px 0;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <span class="badge" style="margin-bottom: 15px;">Pricing Policy</span>
+                <h2 style="font-size: 2.5rem; letter-spacing: -1px;">Pilih Layanan & Kecepatan</h2>
+            </div>
+
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="openTab(event, 'akademik')">Akademik & Sekolah</button>
+                <button class="tab-btn" onclick="openTab(event, 'it-support')">IT, Web & Data</button>
+                <button class="tab-btn" onclick="openTab(event, 'design')">Design & PPT</button>
+            </div>
+
+            <div id="akademik" class="tab-content active">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="book-marked" size="32"></i>
+                                <span style="font-size: 10px; font-weight: 800; color: var(--accent); background: #f0fdf4; padding: 4px 8px; border-radius: 6px;">FAVORIT</span>
+                            </div>
+                            <h3>Tugas Harian & PR</h3>
+                            <p style="color: var(--text-dim); font-size: 13px;">Matematika, Statistika, Rangkuman Materi.</p>
+                            <div class="price-box">
+                                <div class="price-row"><span>Reguler (2-3 Hari)</span><b>Rp 15k</b></div>
+                                <div class="price-row"><span>Ekspres (24 Jam)</span><b style="color:var(--primary)">Rp 35k</b></div>
+                                <div class="price-row"><span>Flash (6 Jam)</span><b style="color:#ef4444">Rp 60k</b></div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="https://wa.me/628975614300" class="btn-primary" style="flex:1; font-size:12px; justify-content:center;">Order Now</a>
+                            <a href="https://wa.me/628975614300" class="btn-outline" style="flex:1; font-size:12px; justify-content:center;">Chat</a>
+                        </div>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="scroll-text" size="32"></i>
+                            <h3>Makalah & Laporan</h3>
+                            <p style="color: var(--text-dim); font-size: 13px;">Laporan Praktikum, KTI, atau Makalah Kampus.</p>
+                            <div class="price-box">
+                                <div class="price-row"><span>Reguler (3-5 Hari)</span><b>Rp 50k</b></div>
+                                <div class="price-row"><span>Ekspres (2 Hari)</span><b style="color:var(--primary)">Rp 85k</b></div>
+                                <div class="price-row"><span>Flash (24 Jam)</span><b style="color:#ef4444">Rp 150k+</b></div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="https://wa.me/628975614300" class="btn-primary" style="flex:1; font-size:12px; justify-content:center;">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="it-support" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="code-2" size="32"></i>
+                            <h3>Web & Coding Dasar</h3>
+                            <p style="color: var(--text-dim); font-size: 13px;">HTML, CSS, Laravel, Python, & SQL.</p>
+                            <div class="price-box">
+                                <div class="price-row"><span>Standard Project</span><b>Rp 150k</b></div>
+                                <div class="price-row"><span>Complex Project</span><b style="color:var(--primary)">Rp 350k</b></div>
+                                <div class="price-row"><span>Sangat Cepat</span><b style="color:#ef4444">+50%</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center;">Order via WhatsApp</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="database" size="32"></i>
+                            <h3>Olah Data & Excel</h3>
+                            <p style="color: var(--text-dim); font-size: 13px;">Formula Kompleks, Pivot Table, & Data Entry.</p>
+                            <div class="price-box">
+                                <div class="price-row"><span>Standard (1-2 Hari)</span><b>Rp 50k</b></div>
+                                <div class="price-row"><span>Express (6 Jam)</span><b style="color:#ef4444">Rp 120k</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center;">Order via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="design" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="presentation" size="32"></i>
+                            <h3>PPT Premium</h3>
+                            <p style="color: var(--text-dim); font-size: 13px;">Desain Estetik, Infografis, & Animasi.</p>
+                            <div class="price-box">
+                                <div class="price-row"><span>Ekonomis (3 Hari)</span><b>Rp 5k/Slide</b></div>
+                                <div class="price-row"><span>Instant (3 Jam)</span><b style="color:#ef4444">Rp 15k/Slide</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center;">Order via WhatsApp</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="palette" size="32"></i>
+                            <h3>Poster & CV ATS</h3>
+                            <p style="color: var(--text-dim); font-size: 13px;">Poster Event & CV Standar Perusahaan.</p>
+                            <div class="price-box">
+                                <div class="price-row"><span>Standard (2 Hari)</span><b>Rp 30k</b></div>
+                                <div class="price-row"><span>Express (5 Jam)</span><b style="color:#ef4444">Rp 75k</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center;">Order via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" style="padding: 80px 0;">
+            <div class="glass" style="text-align: center; padding: 80px 40px; background: var(--secondary-bg); border: none;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Hasil Kerja Saya</h2>
+                <p style="color: var(--text-dim); margin-bottom: 40px;">Cek portofolio resmi saya untuk melihat projek IT yang telah selesai.</p>
+                <a href="https://aldoferdiansyahh.github.io/Portfolio-AldoFerdii/" target="_blank" class="btn-primary" style="text-decoration: none;">
+                    Buka Portfolio Utama <i data-lucide="external-link"></i>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <div class="mobile-nav">
+        <a href="#home" class="active"><i data-lucide="home"></i>Home</a>
+        <a href="#layanan"><i data-lucide="layers"></i>Layanan</a>
+        <a href="#portfolio"><i data-lucide="briefcase"></i>Projek</a>
+        <a href="https://wa.me/628975614300"><i data-lucide="send"></i>Order</a>
+    </div>
+
+    <footer style="background: #0f172a; color: #ffffff; padding: 80px 0 100px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px;">
+                <div>
+                    <div class="logo" style="color: #ffffff; font-size: 24px;">Aldo<span style="color: #3b82f6;">Ferdii.</span></div>
+                    <p style="color: #94a3b8; font-size: 14px; margin-top: 15px;">Solusi pengerjaan tugas akademik & IT profesional Bandung.</p>
+                    <div style="display: flex; gap: 20px; margin-top: 25px;">
+                        <a href="https://instagram.com/aldoferdii" target="_blank" style="color: #fff;"><i data-lucide="instagram"></i></a>
+                        <a href="https://github.com/AldoFerdiansyahh" target="_blank" style="color: #fff;"><i data-lucide="github"></i></a>
+                        <a href="mailto:solusi.by.aldoferdii@gmail.com" style="color: #fff;"><i data-lucide="mail"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 25px; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Kontak Resmi</h4>
+                    <p style="color: #94a3b8; font-size: 14px; margin-bottom: 10px;">solusi.by.aldoferdii@gmail.com</p>
+                    <p style="color: #94a3b8; font-size: 14px;">Bandung, Jawa Barat</p>
+                </div>
+            </div>
+            <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                <p style="color: #64748b; font-size: 12px;">&copy; 2026 AldoFerdii Solusi. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Tab Switching Logic
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
