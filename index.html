@@ -29,6 +29,8 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            /* Memberikan ruang agar tombol kartu terakhir tidak tertutup navigasi mobile */
+            padding-bottom: 140px; 
         }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
@@ -45,7 +47,7 @@
             color: var(--text-main);
             padding: 6px 16px;
             border-radius: 100px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             display: inline-block;
             border: 1px solid var(--border);
@@ -63,11 +65,7 @@
             border-bottom: 1px solid var(--border);
         }
 
-        nav.desktop-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        nav.desktop-nav { display: flex; justify-content: space-between; align-items: center; }
 
         .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; color: var(--text-main); text-decoration: none; }
         .logo span { color: var(--primary); }
@@ -77,8 +75,8 @@
         .nav-links a:hover { color: var(--primary); }
 
         .hero { padding: 100px 0 60px; text-align: center; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin: 24px 0; font-weight: 800; color: var(--text-main); letter-spacing: -2px; }
-        .hero p { color: var(--text-dim); max-width: 650px; margin: 0 auto 40px; font-size: 1.15rem; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1.1; margin: 24px 0; font-weight: 800; }
+        .hero p { color: var(--text-dim); max-width: 650px; margin: 0 auto 40px; font-size: 1.1rem; }
 
         .btn-primary {
             background: var(--text-main);
@@ -95,7 +93,11 @@
             cursor: pointer;
         }
 
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: #1e293b; }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: #1e293b;
+        }
 
         .btn-outline {
             background: white;
@@ -113,10 +115,11 @@
 
         .btn-outline:hover { background: var(--secondary-bg); border-color: var(--text-main); }
 
-        .tabs-header { display: flex; gap: 12px; overflow-x: auto; margin-bottom: 40px; justify-content: center; padding: 10px; }
+        .tabs-header { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 40px; justify-content: center; padding: 10px; scrollbar-width: none; }
+        .tabs-header::-webkit-scrollbar { display: none; }
 
         .tab-btn {
-            padding: 12px 24px;
+            padding: 10px 18px;
             border-radius: 12px;
             background: var(--secondary-bg);
             border: 1px solid var(--border);
@@ -125,6 +128,7 @@
             font-weight: 600;
             transition: 0.3s;
             white-space: nowrap;
+            font-size: 13px;
         }
 
         .tab-btn.active { background: var(--text-main); color: white; border-color: var(--text-main); }
@@ -138,27 +142,100 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-height: 540px;
         }
 
         .service-card:hover { border-color: var(--primary); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); }
-        .service-card i { color: var(--primary); margin-bottom: 24px; }
 
         .price-box { background: var(--secondary-bg); padding: 15px; border-radius: 14px; margin-bottom: 20px; }
-        .price-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
+        .price-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
 
         .mobile-nav {
-            position: fixed; bottom: 20px; left: 20px; right: 20px; height: 70px;
+            position: fixed; bottom: 20px; left: 20px; right: 20px; height: 75px;
             display: flex; justify-content: space-around; align-items: center;
             z-index: 1000; background: white; border: 1px solid var(--border);
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 20px;
         }
-
         .mobile-nav a { color: var(--text-dim); text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 11px; font-weight: 600; }
         .mobile-nav a.active { color: var(--primary); }
+
+        /* FOOTER STYLES */
+        .footer-link { color: #94a3b8; text-decoration: none; font-size: 14px; transition: 0.3s; display: block; margin-bottom: 10px; }
+        .footer-link:hover { color: #ffffff; padding-left: 5px; }
+        .payment-badge { background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); }
 
         @media (min-width: 768px) {
             .nav-links { display: flex; }
             .mobile-nav { display: none; }
+            body { padding-bottom: 0; }
+        }
+
+        /* Style untuk Modal Pembayaran */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: none; /* Awalnya sembunyi */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 400px;
+            width: 100%;
+            padding: 30px;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .account-item {
+            margin-bottom: 15px;
+        }
+
+        .account-item .label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .number-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--secondary-bg);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .number-row code {
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .number-row button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-dim);
+            transition: 0.3s;
+        }
+
+        .number-row button:hover {
+            color: var(--primary);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -175,8 +252,8 @@
                     <a href="#faq">FAQ</a>
                 </div>
                 <div style="display: flex; align-items: center; gap: 15px;">
-                    <span style="font-size: 12px; font-weight: 700; color: #10b981;">● ONLINE</span>
-                    <a href="https://wa.me/628975614300" class="btn-primary" style="padding: 10px 20px; font-size: 13px; border-radius: 10px; text-decoration: none;">Order Now</a>
+                    <span style="font-size: 11px; font-weight: 800; color: #10b981;">● ONLINE</span>
+                    <a href="https://wa.me/628975614300" class="btn-primary" style="padding: 10px 18px; font-size: 13px; border-radius: 10px;">Order Now</a>
                 </div>
             </nav>
         </div>
@@ -186,18 +263,17 @@
         <section class="hero" id="home">
             <span class="badge">#1 Student Solutions in Bandung</span>
             <h1>Tugas Beres, <br>Hidup Jadi Tenang.</h1>
-            <p>Solusi bantuan tugas sekolah, SMK, hingga kuliah. Dikerjakan profesional oleh mahasiswa Informatika dengan standar akademik tinggi (IPK 3.90).</p>
+            <p>Jasa bantuan pengerjaan tugas sekolah, SMK, hingga kuliah. Ditangani langsung oleh mahasiswa Informatika berprestasi (IPK 3.90).</p>
             <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
                 <a href="#layanan" class="btn-primary" style="text-decoration: none;">Lihat Layanan <i data-lucide="chevron-right"></i></a>
                 <a href="https://wa.me/628975614300" class="btn-outline" style="text-decoration: none;">Konsultasi Gratis</a>
             </div>
         </section>
 
-        <section id="layanan" style="padding: 100px 0;">
+        <section id="layanan" style="padding: 60px 0;">
             <div style="text-align: center; margin-bottom: 50px;">
                 <span class="badge" style="margin-bottom: 15px;">Pricing Policy</span>
-                <h2 style="font-size: 2.5rem; letter-spacing: -1.5px; color: var(--text-main);">Pilih Layanan & Kecepatan</h2>
-                <p style="color: var(--text-dim);">Semakin cepat deadline kamu, semakin prioritas pengerjaan kami.</p>
+                <h2 style="font-size: 2.5rem; letter-spacing: -1px;">Pilih Layanan & Kecepatan</h2>
             </div>
 
             <div class="tabs-header">
@@ -211,8 +287,8 @@
                     <div class="glass service-card">
                         <div>
                             <div style="display: flex; justify-content: space-between; align-items: start;">
-                                <i data-lucide="book-marked" size="32"></i>
-                                <span style="font-size: 10px; font-weight: 800; color: #10b981; background: #f0fdf4; padding: 4px 8px; border-radius: 6px;">FAVORIT</span>
+                                <i data-lucide="book-marked" size="32" style="color: var(--primary);"></i>
+                                <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">FAVORIT</span>
                             </div>
                             <h3 style="margin: 15px 0 8px;">Tugas Harian & PR</h3>
                             <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Matematika, Statistika, Rangkuman Materi.</p>
@@ -223,14 +299,13 @@
                             </div>
                         </div>
                         <div style="display: flex; gap: 10px;">
-                            <a href="https://wa.me/628975614300" class="btn-primary" style="flex:1; font-size:12px; justify-content:center; text-decoration:none;">Order Now</a>
-                            <a href="https://wa.me/628975614300" class="btn-outline" style="flex:1; font-size:12px; justify-content:center; text-decoration:none;">Chat</a>
+                            <a href="https://wa.me/628975614300" class="btn-primary" style="flex:1; justify-content:center; text-decoration:none;">Order Now</a>
                         </div>
                     </div>
 
                     <div class="glass service-card">
                         <div>
-                            <i data-lucide="scroll-text" size="32"></i>
+                            <i data-lucide="scroll-text" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">Makalah & Laporan</h3>
                             <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Laporan Praktikum, KTI, atau Makalah Kampus.</p>
                             <div class="price-box">
@@ -239,9 +314,7 @@
                                 <div class="price-row"><span>Flash (24 Jam)</span><b style="color:#ef4444">Rp 150k+</b></div>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://wa.me/628975614300" class="btn-primary" style="flex:1; font-size:12px; justify-content:center; text-decoration:none;">Order Now</a>
-                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -250,13 +323,13 @@
                 <div class="grid-3">
                     <div class="glass service-card">
                         <div>
-                            <i data-lucide="code-2" size="32"></i>
+                            <i data-lucide="code-2" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">Web & Coding</h3>
                             <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">HTML, CSS, Laravel, Python, & SQL.</p>
                             <div class="price-box">
                                 <div class="price-row"><span>Standard Project</span><b>Rp 150k</b></div>
                                 <div class="price-row"><span>Complex Project</span><b style="color:var(--primary)">Rp 350k</b></div>
-                                <div class="price-row"><span>Sangat Cepat</span><b style="color:#ef4444">+50%</b></div>
+                                <div class="price-row"><span>Express</span><b style="color:#ef4444">+50%</b></div>
                             </div>
                         </div>
                         <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order via WhatsApp</a>
@@ -264,9 +337,9 @@
 
                     <div class="glass service-card">
                         <div>
-                            <i data-lucide="database" size="32"></i>
+                            <i data-lucide="database" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">Olah Data & Excel</h3>
-                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Excel Formula, Pivot Table, & SQL Query.</p>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Formula Excel, Pivot Table, & SQL Query.</p>
                             <div class="price-box">
                                 <div class="price-row"><span>Standard (1-2 Hari)</span><b>Rp 50k</b></div>
                                 <div class="price-row"><span>Express (6 Jam)</span><b style="color:#ef4444">Rp 120k</b></div>
@@ -281,7 +354,7 @@
                 <div class="grid-3">
                     <div class="glass service-card">
                         <div>
-                            <i data-lucide="presentation" size="32"></i>
+                            <i data-lucide="presentation" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">PPT Premium</h3>
                             <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Desain Estetik, Infografis, & Animasi.</p>
                             <div class="price-box">
@@ -294,11 +367,11 @@
 
                     <div class="glass service-card">
                         <div>
-                            <i data-lucide="palette" size="32"></i>
-                            <h3 style="margin: 15px 0 8px;">Poster & CV ATS</h3>
-                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Poster Event & CV Standar Perusahaan.</p>
+                            <i data-lucide="palette" size="32" style="color: var(--primary);"></i>
+                            <h3 style="margin: 15px 0 8px;">Poster, Flyer & CV ATS</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Poster Event, Flyer Promo & CV Profesional.</p>
                             <div class="price-box">
-                                <div class="price-row"><span>Standard (2 Hari)</span><b>Rp 30k</b></div>
+                                <div class="price-row"><span>Standard (2 Hari)</span><b>Rp 35k</b></div>
                                 <div class="price-row"><span>Express (5 Jam)</span><b style="color:#ef4444">Rp 75k</b></div>
                             </div>
                         </div>
@@ -309,9 +382,9 @@
         </section>
 
         <section id="portfolio" style="padding: 80px 0;">
-            <div class="glass" style="text-align: center; padding: 80px 40px; background: var(--secondary-bg); border: none;">
-                <h2 style="font-size: 2.5rem; margin-bottom: 20px; letter-spacing: -1px;">Hasil Kerja Saya</h2>
-                <p style="color: var(--text-dim); margin-bottom: 40px;">Cek portofolio resmi saya untuk melihat projek IT dan laporan akademik yang telah selesai.</p>
+            <div class="glass" style="text-align: center; padding: 60px 40px; background: var(--secondary-bg); border: none;">
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">Hasil Kerja Saya</h2>
+                <p style="color: var(--text-dim); margin-bottom: 40px;">Cek projek IT & laporan akademik yang telah selesai di portfolio resmi saya.</p>
                 <a href="https://aldoferdiansyahh.github.io/Portfolio-AldoFerdii/" target="_blank" class="btn-primary" style="text-decoration: none;">
                     Buka Portfolio Utama <i data-lucide="external-link"></i>
                 </a>
@@ -326,45 +399,133 @@
         <a href="https://wa.me/628975614300"><i data-lucide="send"></i>Order</a>
     </div>
 
-    <footer style="background: #0f172a; color: #ffffff; padding: 80px 0 100px; border-top: 1px solid rgba(255,255,255,0.1);">
+    <footer style="background: #0f172a; color: #ffffff; padding: 100px 0 140px; border-top: 1px solid rgba(255,255,255,0.05);">
         <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
+                
                 <div>
-                    <div class="logo" style="color: #ffffff; font-size: 24px;">Aldo<span style="color: #3b82f6;">Ferdii.</span></div>
-                    <p style="color: #94a3b8; font-size: 14px; margin-top: 15px;">Solusi pengerjaan tugas akademik & IT profesional Bandung.</p>
-                    <div style="display: flex; gap: 20px; margin-top: 25px;">
-                        <a href="https://instagram.com/aldoferdii" target="_blank" style="color: #fff;"><i data-lucide="instagram"></i></a>
-                        <a href="https://github.com/AldoFerdiansyahh" target="_blank" style="color: #fff;"><i data-lucide="github"></i></a>
-                        <a href="mailto:solusi.by.aldoferdii@gmail.com" style="color: #fff;"><i data-lucide="mail"></i></a>
+                    <div class="logo" style="color: #ffffff; font-size: 26px; margin-bottom: 25px;">Aldo<span style="color: #3b82f6;">Ferdii.</span></div>
+                    <p style="color: #94a3b8; font-size: 14px; line-height: 1.8; margin-bottom: 25px;">
+                        Solusi profesional untuk kebutuhan akademik maupun IT.
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="https://instagram.com/aldoferdii" target="_blank" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff;"><i data-lucide="instagram" size="20"></i></a>
+                        <a href="https://github.com/AldoFerdiansyahh" target="_blank" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff;"><i data-lucide="github" size="20"></i></a>
+                        <a href="mailto:solusi.by.aldoferdii@gmail.com" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff;"><i data-lucide="mail" size="20"></i></a>
                     </div>
                 </div>
+
                 <div>
-                    <h4 style="margin-bottom: 25px; text-transform: uppercase; font-size: 14px;">Kontak Resmi</h4>
-                    <p style="color: #94a3b8; font-size: 14px; margin-bottom: 10px;">solusi.by.aldoferdii@gmail.com</p>
-                    <p style="color: #94a3b8; font-size: 14px;">Bandung, Jawa Barat</p>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Keunggulan</h4>
+                    <ul style="list-style: none;">
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Hasil Rapi & Detail</li>
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Fast Response</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Navigasi</h4>
+                    <a href="#home" class="footer-link">Beranda</a>
+                    <a href="#layanan" class="footer-link">Layanan Unggulan</a>
+                    <a href="#portfolio" class="footer-link">Projek Selesai</a>
+                    <a href="https://wa.me/628975614300" class="footer-link">Hubungi Kami</a>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Pembayaran</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                        <span class="payment-badge" style="cursor: pointer;" onclick="openModal()">BRI</span>
+                        <span class="payment-badge" style="cursor: pointer;" onclick="openModal()">BCA</span>
+                        <span class="payment-badge" style="cursor: pointer;" onclick="openModal()">GOPAY</span>
+                        <span class="payment-badge" style="cursor: pointer;" onclick="openModal()">SHOPEEPAY</span>
+                    </div>
+                    <p style="font-size: 12px; color: #64748b;">Lokasi: Bandung, Jawa Barat</p>
+                </div>
+
+                <div id="paymentModal" class="modal-overlay">
+                    <div class="modal-content glass">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                            <h3 style="color: var(--text-main); font-weight: 800;">Nomor Rekening</h3>
+                            <span style="cursor: pointer; color: var(--text-dim);" onclick="closeModal()"><i data-lucide="x"></i></span>
+                        </div>
+                        
+                        <div class="account-item">
+                            <span class="label">BRI</span>
+                            <div class="number-row">
+                                <code id="bri">065001010250505</code>
+                                <button onclick="copyText('065001010250505')"><i data-lucide="copy" size="14"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="account-item">
+                            <span class="label">BCA</span>
+                            <div class="number-row">
+                                <code id="bca">7840465262</code>
+                                <button onclick="copyText('7840465262')"><i data-lucide="copy" size="14"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="account-item">
+                            <span class="label">GOPAY / SHOPEEPAY</span>
+                            <div class="number-row">
+                                <code id="ewallet">08975614300</code>
+                                <button onclick="copyText('08975614300')"><i data-lucide="copy" size="14"></i></button>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 11px; color: var(--text-dim); margin-top: 15px; text-align: center;">
+                            Atas Nama: <strong>Aldo Ferdiansyah</strong>
+                        </p>
+                        
+                        <button class="btn-primary" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="closeModal()">Tutup</button>
+                    </div>
                 </div>
             </div>
-            <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
-                <p style="color: #64748b; font-size: 12px;">&copy; 2026 AldoFerdii Solusi. All Rights Reserved.</p>
+
+            <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+                <p style="color: #64748b; font-size: 12px; font-weight: 600;">&copy; 2026 AldoFerdii Solusi. All Rights Reserved.</p>
+                <div style="display: flex; gap: 20px;">
+                    <span style="color: #64748b; font-size: 12px;">Verified Developer</span>
+                    <span style="color: #64748b; font-size: 12px;">Premium Quality</span>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
-
         function openTab(evt, tabName) {
             let i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
+            for (i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
             tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
+            for (i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
             document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
+            evt.currentTarget.classList.add("active");
+        }
+
+                // Fungsi untuk membuka modal
+        function openModal() {
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Menutup modal jika klik di luar area modal
+        window.onclick = function(event) {
+            let modal = document.getElementById('paymentModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Fungsi Copy Text (Opsional biar makin keren)
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("Nomor rekening berhasil disalin!");
         }
     </script>
 </body>
