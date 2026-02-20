@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AldoFerdii Solusi | Jasa Tugas & IT Support</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #ffffff;
+            --secondary-bg: #f8fafc;
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --border: #e2e8f0;
+            --card: #ffffff;
+            --accent: #10b981;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 140px; 
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        .glass {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .badge {
+            background: #f1f5f9;
+            color: var(--text-main);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav.desktop-nav { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; color: var(--text-main); text-decoration: none; }
+        .logo span { color: var(--primary); }
+
+        .nav-links { display: none; gap: 30px; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .hero { padding: 100px 0 60px; text-align: center; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1.1; margin: 24px 0; font-weight: 800; }
+        .hero p { color: var(--text-dim); max-width: 650px; margin: 0 auto 40px; font-size: 1.1rem; }
+
+        .btn-primary {
+            background: var(--text-main);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 18px 36px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 40px;
+            justify-content: flex-start;
+            padding: 10px 5px;
+            scrollbar-width: none;
+        }
+        .tabs-header::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            white-space: nowrap;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .tab-btn.active { background: var(--text-main); color: white; border-color: var(--text-main); }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+
+        .service-card {
+            padding: 30px;
+            background: white;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 520px;
+        }
+
+        .details-list {
+            background: var(--secondary-bg);
+            padding: 15px;
+            border-radius: 14px;
+            margin: 15px 0;
+            font-size: 12px;
+            list-style: none;
+        }
+
+        .details-list li { margin-bottom: 6px; color: var(--text-dim); position: relative; padding-left: 15px; }
+        .details-list li::before { content: '•'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+
+        .price-box {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: auto;
+        }
+
+        .price-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+
+        .mobile-nav {
+            position: fixed; bottom: 20px; left: 20px; right: 20px; height: 75px;
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 1000; background: white; border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 20px;
+        }
+        .mobile-nav a { color: var(--text-dim); text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 11px; font-weight: 600; }
+        .mobile-nav a.active { color: var(--primary); }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
+        }
+
+        .modal-content { max-width: 400px; width: 100%; padding: 30px; animation: slideUp 0.3s ease-out; }
+        .number-row { display: flex; justify-content: space-between; align-items: center; background: var(--secondary-bg); padding: 10px 15px; border-radius: 10px; border: 1px solid var(--border); }
+
+        @media (min-width: 768px) {
+            .nav-links { display: flex; }
+            .mobile-nav { display: none; }
+            body { padding-bottom: 0; }
+            .tabs-header { justify-content: center; }
+            .tab-btn { font-size: 14px; padding: 12px 24px; }
+        }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="desktop-nav">
+                <a href="#home" class="logo">Aldo<span>Ferdii.</span></a>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#layanan">Layanan</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 11px; font-weight: 800; color: #10b981;">● ONLINE</span>
+                    <a href="https://wa.me/628975614300" class="btn-primary" style="padding: 10px 18px; font-size: 13px; border-radius: 10px;">Order Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero" id="home">
+            <span class="badge">#1 Student Solutions in Bandung</span>
+            <h1>Tugas Beres, <br>Hidup Jadi Tenang.</h1>
+            <p>Solusi profesional oleh mahasiswa Informatika (IPK 3.70).</p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <a href="#layanan" class="btn-primary" style="text-decoration: none;">Lihat Layanan <i data-lucide="chevron-right"></i></a>
+                <a href="https://wa.me/628975614300" class="btn-outline" style="text-decoration: none;">Konsultasi Gratis</a>
+            </div>
+        </section>
+
+        <section id="layanan" style="padding: 60px 0;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <span class="badge" style="margin-bottom: 15px;">Pricing Policy</span>
+                <h2 style="font-size: 2.5rem; letter-spacing: -1px;">Detail Layanan & Estimasi</h2>
+            </div>
+
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="openTab(event, 'akademik')">Akademik & Sekolah</button>
+                <button class="tab-btn" onclick="openTab(event, 'it-support')">IT, Web & Data</button>
+                <button class="tab-btn" onclick="openTab(event, 'design')">Design & PPT</button>
+            </div>
+
+            <div id="akademik" class="tab-content active">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="book-marked" size="32" style="color: var(--primary);"></i>
+                                <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">AKADEMIK</span>
+                            </div>
+                            <h3 style="margin: 15px 0 8px;">1. Tugas Harian & PR</h3>
+                            <ul class="details-list">
+                                <li>Matematika & Statistika lanjut</li>
+                                <li>Rangkuman materi sekolah/kuliah</li>
+                                <li>Analisis Kasus & Jawaban Teori</li>
+                            </ul>
+                            <div class="price-box">
+                                <div class="price-row"><span>Reguler (2-3 Hari)</span><b>Rp 35.000</b></div>
+                                <div class="price-row"><span>Ekspres (24 Jam)</span><b style="color:var(--primary)">Rp 65.000</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order Now</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="scroll-text" size="32" style="color: var(--primary);"></i>
+                            <h3 style="margin: 15px 0 8px;">2. Makalah & Laporan</h3>
+                            <ul class="details-list">
+                                <li>Laporan Praktikum & Observasi</li>
+                                <li>Makalah / KTI (Bebas Plagiasi)</li>
+                                <li>Sitasi Standar APA/IEEE/ISO</li>
+                            </ul>
+                            <div class="price-box">
+                                <div class="price-row"><span>Standar (3-5 Hari)</span><b>Rp 120.000</b></div>
+                                <div class="price-row"><span>Cepat (2 Hari)</span><b style="color:var(--primary)">Rp 250.000</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="it-support" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="code-2" size="32" style="color: var(--primary);"></i>
+                            <h3 style="margin: 15px 0 8px;">3. Web & Coding</h3>
+                            <ul class="details-list">
+                                <li>HTML, CSS & Bootstrap</li>
+                                <li>PHP & Laravel Framework</li>
+                                <li>Python & Google Colab</li>
+                            </ul>
+                            <div class="price-box">
+                                <div class="price-row"><span>Fix Bug / Script</span><b>Rp 150.000</b></div>
+                                <div class="price-row"><span>Full Project</span><b style="color:var(--primary)">Rp 500k - 2jt</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order Now</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="database" size="32" style="color: var(--primary);"></i>
+                            <h3 style="margin: 15px 0 8px;">4. Olah Data & Excel</h3>
+                            <ul class="details-list">
+                                <li>Formula Kompleks & Pivot Table</li>
+                                <li>Data Cleaning & Entry</li>
+                                <li>Visualisasi Grafik / Dashboard</li>
+                            </ul>
+                            <div class="price-box">
+                                <div class="price-row"><span>Standar (2 Hari)</span><b>Rp 100.000</b></div>
+                                <div class="price-row"><span>Instant (6 Jam)</span><b style="color:#ef4444">Rp 250.000</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="design" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="presentation" size="32" style="color: var(--primary);"></i>
+                            <h3 style="margin: 15px 0 8px;">5. PPT Presentasi Premium</h3>
+                            <ul class="details-list">
+                                <li>Desain Estetik & Slide Master</li>
+                                <li>Animasi & Transisi Halus</li>
+                                <li>Infografis & Chart Modern</li>
+                            </ul>
+                            <div class="price-box">
+                                <div class="price-row"><span>Reguler</span><b>Rp 15.000/Slide</b></div>
+                                <div class="price-row"><span>Instant (3 Jam)</span><b style="color:#ef4444">Rp 35k/Slide</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order Now</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="palette" size="32" style="color: var(--primary);"></i>
+                            <h3 style="margin: 15px 0 8px;">6. Poster, Flyer & CV ATS</h3>
+                            <ul class="details-list">
+                                <li>Desain Poster Event / Flyer</li>
+                                <li>CV ATS Friendly Standard HRD</li>
+                                <li>High Resolution (PDF/PNG)</li>
+                            </ul>
+                            <div class="price-box">
+                                <div class="price-row"><span>Layanan Desain</span><b>Rp 75.000</b></div>
+                                <div class="price-row"><span>Paket Ekspres</span><b style="color:var(--primary)">Rp 125.000</b></div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" style="padding: 80px 0;">
+            <div class="glass" style="text-align: center; padding: 60px 40px; background: var(--secondary-bg); border: none;">
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">Hasil Kerja Saya</h2>
+                <p style="color: var(--text-dim); margin-bottom: 40px;">Cek projek IT & laporan yang telah selesai di portfolio resmi saya.</p>
+                <a href="https://aldoferdiansyahh.github.io/Portfolio-AldoFerdii/" target="_blank" class="btn-primary" style="text-decoration: none;">Buka Portfolio Utama</a>
+            </div>
+        </section>
+    </div>
+
+    <div class="mobile-nav">
+        <a href="#home" class="active"><i data-lucide="home"></i>Home</a>
+        <a href="#layanan"><i data-lucide="layers"></i>Layanan</a>
+        <a href="https://wa.me/628975614300"><i data-lucide="send"></i>Order</a>
+    </div>
+
+    <footer style="background: #0f172a; color: #ffffff; padding: 100px 0 140px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px;">
+                <div>
+                    <div class="logo" style="color:#fff; font-size: 26px; margin-bottom: 20px;">Aldo<span>Ferdii.</span></div>
+                    <p style="color: #94a3b8; font-size: 14px;">Manager Marketing & R&D PT Asana Bintang. Solusi IT & Akademik Terpercaya.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 25px;">Navigasi</h4>
+                    <a href="#home" class="footer-link" style="color: #94a3b8; text-decoration: none; display: block; margin-bottom: 10px;">Beranda</a>
+                    <a href="#layanan" class="footer-link" style="color: #94a3b8; text-decoration: none; display: block;">Layanan</a>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 25px;">Pembayaran</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;" onclick="openModal()">
+                        <span class="payment-badge" style="cursor:pointer; background:rgba(255,255,255,0.05); padding:8px; border-radius:5px; font-size:10px;">BRI / BCA / EWALLET</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <h3 style="margin-bottom:20px;">Nomor Rekening</h3>
+            <div class="number-row" style="margin-bottom:10px;"><code>BRI: 065001010250505</code><button onclick="copyText('065001010250505')"><i data-lucide="copy" size="14"></i></button></div>
+            <div class="number-row" style="margin-bottom:10px;"><code>BCA: 7840465262</code><button onclick="copyText('7840465262')"><i data-lucide="copy" size="14"></i></button></div>
+            <div class="number-row"><code>E-WALLET: 08975614300</code><button onclick="copyText('08975614300')"><i data-lucide="copy" size="14"></i></button></div>
+            <p style="font-size:11px; margin-top:15px; text-align:center;">A/N Aldo Ferdiansyah</p>
+            <button class="btn-primary" style="width:100%; margin-top:20px;" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+        function openModal() { document.getElementById('paymentModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
+        function copyText(text) { navigator.clipboard.writeText(text); alert("Disalin!"); }
+    </script>
+</body>
+</html>

@@ -29,7 +29,6 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
-            /* Memberikan ruang agar tombol kartu terakhir tidak tertutup navigasi mobile */
             padding-bottom: 140px; 
         }
 
@@ -115,24 +114,19 @@
 
         .btn-outline:hover { background: var(--secondary-bg); border-color: var(--text-main); }
 
-        /* PERBAIKAN: Header Tab agar tidak kepotong di HP */
         .tabs-header {
             display: flex;
             gap: 8px;
-            overflow-x: auto; /* Memungkinkan geser ke samping */
+            overflow-x: auto;
             margin-bottom: 40px;
-            justify-content: flex-start; /* Ubah dari center ke flex-start agar bisa di-scroll dari kiri */
+            justify-content: flex-start;
             padding: 10px 5px;
-            -webkit-overflow-scrolling: touch; /* Scroll halus di iPhone */
-            scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
 
-        /* Sembunyikan scrollbar di Chrome/Safari agar tetap estetik */
-        .tabs-header::-webkit-scrollbar {
-            display: none;
-        }
+        .tabs-header::-webkit-scrollbar { display: none; }
 
-        /* PERBAIKAN: Tombol Tab */
         .tab-btn {
             padding: 10px 20px;
             border-radius: 12px;
@@ -142,9 +136,9 @@
             cursor: pointer;
             font-weight: 600;
             transition: 0.3s;
-            white-space: nowrap; /* Mencegah teks turun ke bawah */
-            font-size: 13px; /* Ukuran font ideal untuk HP */
-            flex-shrink: 0; /* Mencegah tombol mengkerut/gepeng */
+            white-space: nowrap;
+            font-size: 13px;
+            flex-shrink: 0;
         }
 
         .tab-btn.active { background: var(--text-main); color: white; border-color: var(--text-main); }
@@ -166,6 +160,36 @@
         .price-box { background: var(--secondary-bg); padding: 15px; border-radius: 14px; margin-bottom: 20px; }
         .price-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
 
+        /* Style Baru Dropdown Detail */
+        details {
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            background: var(--secondary-bg);
+        }
+        summary {
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::after { content: "▼"; font-size: 10px; transition: 0.3s; }
+        details[open] summary::after { transform: rotate(180deg); }
+        .detail-content {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 10px;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+        }
+        .detail-content ul { padding-left: 15px; }
+        .note-nego { font-size: 10px; color: var(--text-dim); font-style: italic; margin-top: 10px; text-align: center; }
+
         .mobile-nav {
             position: fixed; bottom: 20px; left: 20px; right: 20px; height: 75px;
             display: flex; justify-content: space-around; align-items: center;
@@ -175,7 +199,6 @@
         .mobile-nav a { color: var(--text-dim); text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 11px; font-weight: 600; }
         .mobile-nav a.active { color: var(--primary); }
 
-        /* FOOTER STYLES */
         .footer-link { color: #94a3b8; text-decoration: none; font-size: 14px; transition: 0.3s; display: block; margin-bottom: 10px; }
         .footer-link:hover { color: #ffffff; padding-left: 5px; }
         .payment-badge { background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); }
@@ -188,68 +211,18 @@
             .tab-btn { font-size: 14px; padding: 12px 24px; }
         }
 
-        /* Style untuk Modal Pembayaran */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            display: none; /* Awalnya sembunyi */
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            padding: 20px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
         }
-
-        .modal-content {
-            max-width: 400px;
-            width: 100%;
-            padding: 30px;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        .account-item {
-            margin-bottom: 15px;
-        }
-
-        .account-item .label {
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .number-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--secondary-bg);
-            padding: 10px 15px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-        }
-
-        .number-row code {
-            font-family: monospace;
-            font-size: 14px;
-            color: var(--text-main);
-        }
-
-        .number-row button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--text-dim);
-            transition: 0.3s;
-        }
-
-        .number-row button:hover {
-            color: var(--primary);
-        }
+        .modal-content { max-width: 400px; width: 100%; padding: 30px; animation: slideUp 0.3s ease-out; }
+        .account-item { margin-bottom: 15px; }
+        .account-item .label { font-size: 11px; font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
+        .number-row { display: flex; justify-content: space-between; align-items: center; background: var(--secondary-bg); padding: 10px 15px; border-radius: 10px; border: 1px solid var(--border); }
+        .number-row code { font-family: monospace; font-size: 14px; color: var(--text-main); }
+        .number-row button { background: none; border: none; cursor: pointer; color: var(--text-dim); transition: 0.3s; }
+        .number-row button:hover { color: var(--primary); }
 
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -298,6 +271,7 @@
                 <button class="tab-btn active" onclick="openTab(event, 'akademik')">Akademik & Sekolah</button>
                 <button class="tab-btn" onclick="openTab(event, 'it-support')">IT, Web & Data</button>
                 <button class="tab-btn" onclick="openTab(event, 'design')">Design & PPT</button>
+                <button class="tab-btn" onclick="openTab(event, 'jasa-ketik')">Jasa Ketik</button>
             </div>
 
             <div id="akademik" class="tab-content active">
@@ -309,30 +283,42 @@
                                 <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">FAVORIT</span>
                             </div>
                             <h3 style="margin: 15px 0 8px;">Tugas Harian & PR</h3>
-                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Matematika, Statistika, Rangkuman Materi.</p>
-                            <div class="price-box">
-                                <div class="price-row"><span>Reguler (2-3 Hari)</span><b>Rp 15k</b></div>
-                                <div class="price-row"><span>Ekspres (24 Jam)</span><b style="color:var(--primary)">Rp 35k</b></div>
-                                <div class="price-row"><span>Flash (6 Jam)</span><b style="color:#ef4444">Rp 60k</b></div>
-                            </div>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Matematika, Statistika, Rangkuman Materi.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (2-3 Hari):</strong> Rp 20.000 - Rp. 50.000</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 55.000 - Rp. 100.000</li>
+                                        <li>Cakupan: Tugas SMP/SMA/Kuliah, Soal Hitungan, Resume Buku.</li>
+                                    </ul>
+                                </div>
+                            </details>
                         </div>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://wa.me/628975614300" class="btn-primary" style="flex:1; justify-content:center; text-decoration:none;">Order Now</a>
-                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order Now</a>
                     </div>
 
                     <div class="glass service-card">
                         <div>
                             <i data-lucide="scroll-text" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">Makalah & Laporan</h3>
-                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Laporan Praktikum, KTI, atau Makalah Kampus.</p>
-                            <div class="price-box">
-                                <div class="price-row"><span>Reguler (3-5 Hari)</span><b>Rp 50k</b></div>
-                                <div class="price-row"><span>Ekspres (2 Hari)</span><b style="color:var(--primary)">Rp 85k</b></div>
-                                <div class="price-row"><span>Flash (24 Jam)</span><b style="color:#ef4444">Rp 150k+</b></div>
-                            </div>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Laporan Praktikum, KTI, atau Makalah Kampus.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (3-5 Hari):</strong> Rp 75.000 - Rp. 150.000</li>
+                                        <li><strong>Express (24 Jam):</strong> Rp 150.000 - Rp. 300.000</li>
+                                        <li>Cakupan: Analisis Data, Daftar Pustaka Standar, Cek Typo, Struktur Rapi.</li>
+                                    </ul>
+                                </div>
+                            </details>
                         </div>
-                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order Now</a>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -343,27 +329,42 @@
                         <div>
                             <i data-lucide="code-2" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">Web & Coding Dasar</h3>
-                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">HTML, CSS, Laravel, Python, & SQL.</p>
-                            <div class="price-box">
-                                <div class="price-row"><span>Standard Project</span><b>Rp 150k</b></div>
-                                <div class="price-row"><span>Complex Project</span><b style="color:var(--primary)">Rp 350k</b></div>
-                                <div class="price-row"><span>Express</span><b style="color:#ef4444">+50%</b></div>
-                            </div>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">HTML, CSS, Laravel, Python, & SQL.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Coding Dasar (12-24 Jam):</strong> Rp 75.000 - Rp. 200.000</li>
+                                        <li><strong>Full Web Project (36 Jam):</strong> Rp 360.000 - Rp. 700.000</li>
+                                        <li>Cakupan: Debugging, Penjelasan Alur Kode, Full Responsif. *Diluar hosting</li>
+                                    </ul>
+                                </div>
+                            </details>
                         </div>
-                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order via WhatsApp</a>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
                     </div>
 
                     <div class="glass service-card">
                         <div>
                             <i data-lucide="database" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">Olah Data & Excel</h3>
-                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Formula Excel, Pivot Table, & SQL Query.</p>
-                            <div class="price-box">
-                                <div class="price-row"><span>Standard (1-2 Hari)</span><b>Rp 50k</b></div>
-                                <div class="price-row"><span>Express (6 Jam)</span><b style="color:#ef4444">Rp 120k</b></div>
-                            </div>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Formula Excel, Pivot Table, & SQL Query.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (2-3 Hari):</strong> Rp 75.000 - Rp. 150.000</li>
+                                        <li><strong>Express (24 Jam):</strong> Rp 130.000 - Rp. 250.000</li>
+                                        <li>Cakupan: Grafik Otomatis, Dashboard, Olah Data Statistika.</li>
+                                    </ul>
+                                </div>
+                            </details>
                         </div>
-                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order via WhatsApp</a>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
                     </div>
                 </div>
             </div>
@@ -374,26 +375,93 @@
                         <div>
                             <i data-lucide="presentation" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">PPT Premium</h3>
-                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Desain Estetik, Infografis, & Animasi.</p>
-                            <div class="price-box">
-                                <div class="price-row"><span>Ekonomis (3 Hari)</span><b>Rp 5k/Slide</b></div>
-                                <div class="price-row"><span>Instant (3 Jam)</span><b style="color:#ef4444">Rp 15k/Slide</b></div>
-                            </div>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Desain Estetik, Infografis, & Animasi.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (1-2 Hari):</strong> Rp 10.000/Slide</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 20.000/Slide</li>
+                                        <li>Cakupan: Bonus File PDF, Link Canva, Master Slide Custom.</li>
+                                    </ul>
+                                </div>
+                            </details>
                         </div>
-                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order via WhatsApp</a>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
                     </div>
 
                     <div class="glass service-card">
                         <div>
                             <i data-lucide="palette" size="32" style="color: var(--primary);"></i>
                             <h3 style="margin: 15px 0 8px;">Poster, Flyer & CV ATS</h3>
-                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Poster Event, Flyer Promo & CV Profesional.</p>
-                            <div class="price-box">
-                                <div class="price-row"><span>Standard (2 Hari)</span><b>Rp 35k</b></div>
-                                <div class="price-row"><span>Express (5 Jam)</span><b style="color:#ef4444">Rp 75k</b></div>
-                            </div>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Poster Event, Flyer Promo & CV Profesional.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (1-2 Hari):</strong> Rp 50.000 - Rp. 75.000</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 90.000 - Rp. 180.000</li>
+                                        <li>Cakupan: High Res PNG/PDF, Revisi 2x, Layout Standar HRD (CV).</li>
+                                    </ul>
+                                </div>
+                            </details>
                         </div>
-                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none;">Order via WhatsApp</a>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="https://wa.me/628975614300" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            <div id="jasa-ketik" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="keyboard" size="32" style="color: var(--primary);"></i>
+                                <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">FAST TYPING</span>
+                            </div>
+                            <h3 style="margin: 15px 0 8px;">Jasa Ketik Dokumen</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Pengetikan Makalah, Skripsi, & Modul Rapi.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (2-3 Hari):</strong> Rp 5.000 - Rp 10.000 / Lembar</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 15.000 - Rp 25.000 / Lembar</li>
+                                        <li>Cakupan: Setting Layout (Margin, Font), Penomoran Halaman, Daftar Isi Otomatis.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai jumlah halaman & negosiasi</div>
+                        <a href="https://wa.me/628975614300?text=Halo%20Aldo,%20saya%20ingin%20order%20Jasa%20Ketik%20Dokumen" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order Now</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="file-type-2" size="32" style="color: var(--primary);"></i>
+                                <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">DATA ENTRY</span>
+                            </div>
+                            <h3 style="margin: 15px 0 8px;">Salin & Transkrip Data</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Ubah PDF/Foto ke Word atau Transkrip Suara.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (2-3 Hari):</strong> Rp 35.000 - Rp 75.000</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 85.000 - Rp 150.000</li>
+                                        <li>Cakupan: Salin Tulisan Tangan ke Digital, Transkrip Audio Pendek, Input Data Tabel.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai tingkat kerumitan data</div>
+                        <a href="https://wa.me/628975614300?text=Halo%20Aldo,%20saya%20ingin%20order%20Jasa%20Salin/Transkrip%20Data" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -401,7 +469,7 @@
 
         <section id="portfolio" style="padding: 80px 0;">
             <div class="glass" style="text-align: center; padding: 60px 40px; background: var(--secondary-bg); border: none;">
-                <h2 style="font-size: 2rem; margin-bottom: 20px;">Hasil Kerja Saya</h2>
+                <h2 style="font-size: 2rem; margin-bottom: 20px; letter-spacing: -1px;">Hasil Kerja Saya</h2>
                 <p style="color: var(--text-dim); margin-bottom: 40px;">Cek projek IT & laporan akademik yang telah selesai di portfolio resmi saya.</p>
                 <a href="https://aldoferdiansyahh.github.io/Portfolio-AldoFerdii/" target="_blank" class="btn-primary" style="text-decoration: none;">
                     Buka Portfolio Utama <i data-lucide="external-link"></i>
@@ -411,16 +479,15 @@
     </div>
 
     <div class="mobile-nav">
-        <a href="#home" class="active"><i data-lucide="home"></i>Home</a>
-        <a href="#layanan"><i data-lucide="layers"></i>Layanan</a>
-        <a href="#portfolio"><i data-lucide="briefcase"></i>Projek</a>
+        <a href="home" class="active"><i data-lucide="home"></i>Home</a>
+        <a href="layanan"><i data-lucide="layers"></i>Layanan</a>
+        <a href="portfolio"><i data-lucide="briefcase"></i>Projek</a>
         <a href="https://wa.me/628975614300"><i data-lucide="send"></i>Order</a>
     </div>
 
     <footer style="background: #0f172a; color: #ffffff; padding: 100px 0 140px; border-top: 1px solid rgba(255,255,255,0.05);">
         <div class="container">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
-                
                 <div>
                     <div class="logo" style="color: #ffffff; font-size: 26px; margin-bottom: 25px;">Aldo<span style="color: #3b82f6;">Ferdii.</span></div>
                     <p style="color: #94a3b8; font-size: 14px; line-height: 1.8; margin-bottom: 25px;">
@@ -432,7 +499,6 @@
                         <a href="mailto:solusi.by.aldoferdii@gmail.com" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff;"><i data-lucide="mail" size="20"></i></a>
                     </div>
                 </div>
-
                 <div>
                     <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Keunggulan</h4>
                     <ul style="list-style: none;">
@@ -440,7 +506,6 @@
                         <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Fast Response</li>
                     </ul>
                 </div>
-
                 <div>
                     <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Navigasi</h4>
                     <a href="#home" class="footer-link">Beranda</a>
@@ -448,7 +513,6 @@
                     <a href="#portfolio" class="footer-link">Projek Selesai</a>
                     <a href="https://wa.me/628975614300" class="footer-link">Hubungi Kami</a>
                 </div>
-
                 <div>
                     <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Pembayaran</h4>
                     <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
@@ -459,56 +523,39 @@
                     </div>
                     <p style="font-size: 12px; color: #64748b;">Lokasi: Bandung, Jawa Barat</p>
                 </div>
-
-                <div id="paymentModal" class="modal-overlay">
-                    <div class="modal-content glass">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
-                            <h3 style="color: var(--text-main); font-weight: 800;">Nomor Rekening</h3>
-                            <span style="cursor: pointer; color: var(--text-dim);" onclick="closeModal()"><i data-lucide="x"></i></span>
-                        </div>
-                        
-                        <div class="account-item">
-                            <span class="label">BRI</span>
-                            <div class="number-row">
-                                <code id="bri">065001010250505</code>
-                                <button onclick="copyText('065001010250505')"><i data-lucide="copy" size="14"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="account-item">
-                            <span class="label">BCA</span>
-                            <div class="number-row">
-                                <code id="bca">7840465262</code>
-                                <button onclick="copyText('7840465262')"><i data-lucide="copy" size="14"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="account-item">
-                            <span class="label">GOPAY / SHOPEEPAY</span>
-                            <div class="number-row">
-                                <code id="ewallet">08975614300</code>
-                                <button onclick="copyText('08975614300')"><i data-lucide="copy" size="14"></i></button>
-                            </div>
-                        </div>
-
-                        <p style="font-size: 11px; color: var(--text-dim); margin-top: 15px; text-align: center;">
-                            Atas Nama: <strong>Aldo Ferdiansyah</strong>
-                        </p>
-                        
-                        <button class="btn-primary" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="closeModal()">Tutup</button>
-                    </div>
-                </div>
             </div>
-
-            <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+            <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
                 <p style="color: #64748b; font-size: 12px; font-weight: 600;">&copy; 2026 AldoFerdii Solusi. All Rights Reserved.</p>
-                <div style="display: flex; gap: 20px;">
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 10px;">
                     <span style="color: #64748b; font-size: 12px;">Verified Developer</span>
                     <span style="color: #64748b; font-size: 12px;">Premium Quality</span>
                 </div>
             </div>
         </div>
     </footer>
+
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h3 style="color: var(--text-main); font-weight: 800;">Nomor Rekening</h3>
+                <span style="cursor: pointer; color: var(--text-dim);" onclick="closeModal()"><i data-lucide="x"></i></span>
+            </div>
+            <div class="account-item">
+                <span class="label">BRI</span>
+                <div class="number-row"><code>065001010250505</code><button onclick="copyText('065001010250505')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <div class="account-item">
+                <span class="label">BCA</span>
+                <div class="number-row"><code>7840465262</code><button onclick="copyText('7840465262')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <div class="account-item">
+                <span class="label">GOPAY / SHOPEEPAY</span>
+                <div class="number-row"><code>08975614300</code><button onclick="copyText('08975614300')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <p style="font-size: 11px; color: var(--text-dim); margin-top: 15px; text-align: center;">Atas Nama: <strong>Aldo Ferdiansyah</strong></p>
+            <button class="btn-primary" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
 
     <script>
         lucide.createIcons();
@@ -521,26 +568,12 @@
             document.getElementById(tabName).style.display = "block";
             evt.currentTarget.classList.add("active");
         }
-
-                // Fungsi untuk membuka modal
-        function openModal() {
-            document.getElementById('paymentModal').style.display = 'flex';
-        }
-
-        // Fungsi untuk menutup modal
-        function closeModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
-
-        // Menutup modal jika klik di luar area modal
+        function openModal() { document.getElementById('paymentModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
         window.onclick = function(event) {
             let modal = document.getElementById('paymentModal');
-            if (event.target == modal) {
-                closeModal();
-            }
+            if (event.target == modal) closeModal();
         }
-
-        // Fungsi Copy Text (Opsional biar makin keren)
         function copyText(text) {
             navigator.clipboard.writeText(text);
             alert("Nomor rekening berhasil disalin!");
