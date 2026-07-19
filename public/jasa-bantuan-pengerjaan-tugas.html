@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasa Bantuan Pengerjaan Tugas Kuliah & Sekolah Terpercaya</title>
+    <meta name="description" content="Mencari jasa bantuan pengerjaan tugas kuliah, sekolah, atau joki tugas IT terpercaya? AldoFerdii Solusi hadir dengan layanan pengerjaan makalah, coding, dan olah data yang cepat, aman, dan bergaransi.">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --secondary-bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --border: #e2e8f0;
+            --accent: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.8; overflow-x: hidden; }
+
+        /* Navbar Sederhana */
+        header { padding: 20px 0; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 800px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; color: var(--text-main); text-decoration: none; }
+        .logo span { color: var(--primary); }
+        .btn-outline { padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border); text-decoration: none; color: var(--text-main); font-size: 13px; font-weight: 700; background: white; transition: 0.3s; cursor: pointer; }
+        .btn-outline:hover { background: #f1f5f9; }
+
+        /* Area Artikel */
+        .article-container { max-width: 800px; margin: 50px auto; padding: 0 20px; }
+        .article-header { text-align: center; margin-bottom: 40px; }
+        .article-header h1 { font-size: 36px; font-weight: 800; line-height: 1.3; margin-bottom: 15px; letter-spacing: -1px; }
+        .article-meta { color: var(--text-dim); font-size: 14px; display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;}
+
+        .article-content { background: white; padding: 40px; border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .article-content p { margin-bottom: 20px; font-size: 16px; color: var(--text-dim); }
+        .article-content h2 { font-size: 26px; font-weight: 800; margin: 40px 0 20px; color: var(--text-main); letter-spacing: -0.5px; }
+        .article-content h3 { font-size: 20px; font-weight: 700; margin: 30px 0 12px; color: var(--text-main); }
+        .article-img { width: 100%; height: auto; border-radius: 16px; margin: 30px 0; border: 1px solid var(--border); object-fit: cover; }
+
+        /* Box CTA */
+        .cta-box { background: #eff6ff; border: 1px solid #bfdbfe; padding: 35px; border-radius: 16px; text-align: center; margin-top: 50px; }
+        .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-top: 20px; transition: 0.3s; border: none; cursor: pointer; font-size: 16px;}
+        .btn-primary:hover { transform: translateY(-2px); background: #1d4ed8; }
+
+        /* FAQ Style */
+        .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+        .faq-item strong { display: block; margin-bottom: 8px; color: var(--text-main); font-size: 18px;}
+
+        /* --- CSS FOOTER & MODAL --- */
+        .glass { background: white; border: 1px solid var(--border); border-radius: 24px; }
+        .footer-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .footer-link { color: #94a3b8; text-decoration: none; font-size: 14px; transition: 0.3s; display: block; margin-bottom: 10px; cursor: pointer; }
+        .footer-link:hover { color: #ffffff; padding-left: 5px; }
+        .payment-badge { background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.3s; }
+        .payment-badge:hover { background: rgba(255,255,255,0.1); color: white; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
+        }
+        .modal-content { max-width: 400px; width: 100%; padding: 30px; animation: slideUp 0.3s ease-out; }
+        .account-item { margin-bottom: 15px; }
+        .account-item .label { font-size: 11px; font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
+        .number-row { display: flex; justify-content: space-between; align-items: center; background: var(--secondary-bg); padding: 10px 15px; border-radius: 10px; border: 1px solid var(--border); }
+        .number-row code { font-family: monospace; font-size: 14px; color: var(--text-main); }
+        .number-row button { background: none; border: none; cursor: pointer; color: var(--text-dim); transition: 0.3s; }
+        .number-row button:hover { color: var(--primary); }
+        .admin-card:hover { border-color: var(--primary) !important; background: #f1f5f9 !important; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .article-content { padding: 25px; }
+            .article-header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Aldo<span>Ferdii.</span></a>
+            <a href="index.html" class="btn-outline">Kembali ke Beranda</a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <div class="article-header">
+            <h1>Jasa Bantuan Pengerjaan Tugas Kuliah & Sekolah: Solusi Cepat & Terpercaya</h1>
+            <div class="article-meta">
+                <span><i data-lucide="calendar" size="14" style="vertical-align: middle;"></i> 20 Juni 2026</span>
+                <span><i data-lucide="folder-open" size="14" style="vertical-align: middle;"></i> Edukasi & Layanan Akademik</span>
+                <span><i data-lucide="clock" size="14" style="vertical-align: middle;"></i> Waktu Baca: 6 Menit</span>
+            </div>
+        </div>
+
+        <div class="article-content">
+            <p>Menjalani kehidupan sebagai pelajar atau mahasiswa di era modern ini menuntut fleksibilitas dan ketangguhan yang luar biasa. Setiap harinya, Anda dihadapkan pada tumpukan tugas sekolah, jadwal kuliah yang padat, kegiatan organisasi, hingga tuntutan magang atau pekerjaan paruh waktu. Tidak heran jika banyak mahasiswa yang akhirnya merasa kewalahan, stres, dan kehabisan waktu ketika *deadline* tugas semakin mendekat.</p>
+            
+            <p>Dalam kondisi yang mendesak seperti ini, mencari <strong>jasa bantuan pengerjaan tugas</strong> (atau yang lebih familiar disebut dengan istilah <em>joki tugas akademik</em>) bukanlah hal yang tabu. Kehadiran layanan pendampingan akademik profesional telah menjadi solusi cerdas bagi mahasiswa yang ingin mempertahankan nilai tinggi tanpa harus mengorbankan kesehatan mental dan kewajiban penting lainnya.</p>
+
+            <h2>Mengapa Banyak Mahasiswa & Siswa Membutuhkan Jasa Pengerjaan Tugas?</h2>
+            <p>Seiring berjalannya waktu, beban kurikulum akademik semakin meningkat. Banyak faktor yang membuat siswa maupun mahasiswa akhirnya beralih ke biro jasa pengerjaan tugas. Berikut adalah beberapa alasan utamanya:</p>
+            
+            <ul style="list-style: none; padding-left: 0; margin-bottom: 20px;">
+                <li style="display: flex; align-items: start; gap: 12px; margin-bottom: 12px;">
+                    <i data-lucide="alert-circle" size="20" color="var(--primary)" style="margin-top: 4px;"></i> 
+                    <span style="color: var(--text-dim);"><strong>Keterbatasan Waktu (Manajemen Waktu):</strong> Mahasiswa sering kali harus membagi fokus antara tugas kuliah, program Kampus Merdeka (MBKM), dan pekerjaan. Waktu 24 jam terasa tidak cukup untuk menyelesaikan semuanya dengan sempurna.</span>
+                </li>
+                <li style="display: flex; align-items: start; gap: 12px; margin-bottom: 12px;">
+                    <i data-lucide="alert-circle" size="20" color="var(--primary)" style="margin-top: 4px;"></i> 
+                    <span style="color: var(--text-dim);"><strong>Materi Kuliah yang Terlalu Rumit:</strong> Tidak semua mata kuliah mudah dicerna. Terkadang, ada tugas spesifik seperti pemrograman (coding), olah data statistik, atau perancangan jaringan IT yang membutuhkan pemahaman teknis khusus yang belum dikuasai sepenuhnya oleh mahasiswa.</span>
+                </li>
+                <li style="display: flex; align-items: start; gap: 12px; margin-bottom: 12px;">
+                    <i data-lucide="alert-circle" size="20" color="var(--primary)" style="margin-top: 4px;"></i> 
+                    <span style="color: var(--text-dim);"><strong>Deadline yang Bersamaan:</strong> Periode Ujian Tengah Semester (UTS) atau Ujian Akhir Semester (UAS) biasanya ditandai dengan turunnya berbagai macam tugas dari dosen yang berbeda dalam waktu yang sangat berdekatan.</span>
+                </li>
+            </ul>
+
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="jasa pengerjaan tugas kuliah mahasiswa" class="article-img">
+
+            <h2>Layanan Jasa Bantuan Tugas Apa Saja yang Tersedia?</h2>
+            <p>Jasa pengerjaan tugas modern tidak hanya melayani pengetikan biasa. Di <strong>AldoFerdii Solusi</strong>, kami menyediakan ekosistem layanan akademik digital yang lengkap. Kami menangani berbagai jenis kesulitan yang dialami klien, antara lain:</p>
+
+            <h3>1. Jasa Pembuatan Makalah & Laporan Praktikum</h3>
+            <p>Bagi mahasiswa jurusan sosial maupun eksak, makalah dan laporan adalah makanan sehari-hari. Kami menyediakan jasa ketik dan penyusunan makalah yang rapi, sesuai dengan kaidah EYD, dan berpedoman pada struktur penulisan akademik. Mulai dari pencarian referensi jurnal ilmiah yang kredibel hingga penyusunan daftar pustaka otomatis menggunakan format standar (APA/Harvard Style).</p>
+
+            <h3>2. Jasa Tugas IT & Coding Dasar</h3>
+            <p>Ini adalah spesialisasi kami. Sebagai tim yang beranggotakan mahasiswa Informatika berprestasi, kami menawarkan jasa pendampingan coding dasar (HTML, CSS, PHP, Laravel, Python) hingga perancangan basis data (SQL). Jika *source code* aplikasi web Anda sering mengalami *error* atau *bug*, layanan jasa IT support kami siap memperbaiki dan menjelaskannya agar Anda tetap memahaminya saat ditanya oleh dosen.</p>
+
+            <h3>3. Jasa Olah Data & Microsoft Excel</h3>
+            <p>Banyak tugas manajemen atau tugas akhir (skripsi) yang membutuhkan analisis tabel yang rumit. Melalui jasa olah data Excel, kami membantu merapikan *raw data*, membuat grafik yang profesional, menerapkan fungsi rumus VLOOKUP/Pivot Table, hingga merancang sebuah *dashboard* pelaporan data yang interaktif.</p>
+
+            <h3>4. Desain Presentasi (PPT) Premium & Poster</h3>
+            <p>Presentasi yang baik adalah kunci mendapatkan nilai A. Selain isi materi yang padat, visual presentasi sangatlah penting. Jasa pembuatan PPT premium kami berfokus pada desain yang estetik, animasi transisi yang mulus, dan *layout* infografis yang membuat audiens fokus pada pemaparan Anda, bukan pada teks yang membosankan.</p>
+
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="joki tugas IT dan jasa pembuatan makalah" class="article-img">
+
+            <h2>Keuntungan Menggunakan Layanan di AldoFerdii Solusi</h2>
+            <p>Di luar sana mungkin banyak biro joki tugas mahasiswa yang bermunculan, namun <strong>AldoFerdii Solusi</strong> menonjol karena kami memposisikan diri sebagai konsultan dan rekan belajar Anda. Dengan pengalaman melayani lebih dari 40+ klien dari berbagai instansi, kami memberikan keunggulan pasti:</p>
+
+            <ul style="list-style: none; padding-left: 0; margin-bottom: 30px;">
+                <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;"><i data-lucide="check-circle" size="20" color="var(--primary)"></i> <span style="color: var(--text-dim);"><strong>Dikerjakan oleh Ahli:</strong> Langsung ditangani oleh mahasiswa berprestasi dengan IPK 3.87 dan 3.8. Kualitas akademik dijamin.</span></li>
+                <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;"><i data-lucide="check-circle" size="20" color="var(--primary)"></i> <span style="color: var(--text-dim);"><strong>Privasi 100% Terjaga:</strong> Identitas klien, nama kampus, dan data diri Anda kami rahasiakan dengan protokol privasi yang sangat ketat.</span></li>
+                <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;"><i data-lucide="check-circle" size="20" color="var(--primary)"></i> <span style="color: var(--text-dim);"><strong>Pendampingan Edukatif:</strong> Kami tidak hanya mengirimkan hasil jadi. Kami terbuka untuk diskusi, menjelaskan alur penyelesaian, sehingga Anda menguasai materi tersebut.</span></li>
+                <li style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;"><i data-lucide="check-circle" size="20" color="var(--primary)"></i> <span style="color: var(--text-dim);"><strong>Tepat Waktu (On-Time Delivery):</strong> Tersedia layanan Reguler hingga layanan Express (12-24 Jam) bagi Anda yang sedang dikejar *deadline* harian.</span></li>
+            </ul>
+
+            <h2>Bagaimana Cara Order Jasa Bantuan Tugas Kami?</h2>
+            <p>Proses pemesanan dan konsultasi di AldoFerdii Solusi dirancang semudah mungkin. Anda cukup menyiapkan detail tugas (bisa berupa foto soal atau panduan PDF dari dosen), lalu klik tombol WhatsApp yang tersedia di website kami. Admin kami akan langsung merespons untuk memberikan sesi konsultasi gratis, menentukan estimasi waktu pengerjaan, dan mendiskusikan biaya yang ramah di kantong pelajar.</p>
+
+            <div class="cta-box">
+                <h3 style="margin-top: 0; font-size: 24px;">Tugas Beres, Hati Tenang!</h3>
+                <p style="margin-bottom: 0;">Berhenti mengorbankan waktu tidur Anda. Hubungi kami sekarang dan biarkan tenaga profesional menyelesaikan beban akademik Anda dengan sempurna.</p>
+                <button onclick="openOrderModal(event, 'Halo Kak Aldo, saya ingin konsultasi mengenai Jasa Bantuan Tugas. Apakah admin sedang online?')" class="btn-primary">Mulai Konsultasi Gratis via WA</button>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 50px 0;">
+
+            <h2>FAQ (Pertanyaan Seputar Jasa Tugas)</h2>
+            <div class="faq-item">
+                <strong>Apakah menggunakan biro jasa bantuan tugas ini aman?</strong>
+                <p>Sangat aman. Privasi dan kerahasiaan data pengguna dijaga dengan sangat ketat selama proses konsultasi hingga *file* akhir dikirimkan. File Anda tidak akan kami publikasikan di mana pun.</p>
+            </div>
+            <div class="faq-item">
+                <strong>Berapa biaya jasa pengerjaan tugas kuliah?</strong>
+                <p>Harga sangat bervariasi bergantung pada tingkat kesulitan, jenjang pendidikan, serta kecepatan waktu pengerjaan (*deadline*). Mulai dari puluhan ribu rupiah untuk tugas harian, harga selalu dapat dinegosiasikan agar pas dengan anggaran mahasiswa.</p>
+            </div>
+            <div class="faq-item">
+                <strong>Apakah menerima pesanan joki tugas mendadak (express)?</strong>
+                <p>Ya. Kami memiliki paket layanan Express di mana tugas dapat diselesaikan dalam kurun waktu 12 hingga 24 jam saja, tergantung dari bobot materinya.</p>
+            </div>
+
+            <div style="margin-top: 50px; font-size: 13px; padding: 20px; background: var(--secondary-bg); border-radius: 12px; border: 1px dashed var(--border);">
+                <strong>Referensi Eksternal Pencarian Akademik:</strong><br><br>
+                Mencari jurnal atau publikasi terpercaya untuk tugas Anda secara mandiri? Kunjungi:
+                <a href="https://scholar.google.com" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">Google Scholar</a> &nbsp;|&nbsp; 
+                <a href="https://sinta.kemdikbud.go.id" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">SINTA Kemdikbud RI</a>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background: #0f172a; color: #ffffff; padding: 100px 0 140px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 80px;">
+        <div class="footer-container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
+                <div>
+                    <div class="logo" style="color: #ffffff; font-size: 26px; margin-bottom: 25px;">Aldo<span style="color: #3b82f6;">Ferdii.</span></div>
+                    <p style="color: #94a3b8; font-size: 14px; line-height: 1.8; margin-bottom: 25px;">
+                        Menyediakan layanan profesional dan terintegrasi untuk membantu pelajar, mahasiswa, hingga pekerja kantoran. Percayakan urusan tugas, desain, dan project IT kamu kepada tim AldoFerdii Solusi untuk hasil yang maksimal.
+                    </p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="https://instagram.com/solusi.by.aldoferdii" target="_blank" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>                        
+                        <a href="https://www.tiktok.com/@solusi.by.aldoferdii" target="_blank" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                        </a>
+                        <a href="#" onclick="openGithubModal(event)" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                        </a>
+                        <a href="mailto:solusi.by.aldoferdii@gmail.com" target="_blank" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Keunggulan</h4>
+                    <ul style="list-style: none;">
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Hasil Rapi & Detail</li>
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Fast Response</li>
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Konsultasi 24/7 gratis!</li>
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Aman & Terpercaya</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Navigasi</h4>
+                    <a href="index.html#home" class="footer-link">Beranda</a>
+                    <a href="index.html#layanan" class="footer-link">Layanan Unggulan</a>
+                    <a href="https://aldoferdiansyahh.github.io/Portfolio-AldoFerdii/" target="_blank" class="footer-link">Portfolio Aldo</a>
+                    <a href="https://mdzakin26.github.io/" target="_blank" class="footer-link">Portfolio Dzaki</a>
+                    <a href="#" onclick="openOrderModal(event, 'Halo Kak, Saya ingin konsultasi mengenai tugas saya ke Aldoferdii.Solusi')" class="footer-link">Hubungi Kami</a>
+                </div>
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Pembayaran</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                        <span class="payment-badge" onclick="openModal()">BRI</span>
+                        <span class="payment-badge" onclick="openModal()">BCA</span>
+                        <span class="payment-badge" onclick="openModal()">GOPAY</span>
+                        <span class="payment-badge" onclick="openModal()">SHOPEEPAY</span>
+                    </div>
+                    <p style="font-size: 12px; color: #64748b;">Lokasi: Bandung, Jawa Barat</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                <p style="color: #64748b; font-size: 12px; font-weight: 600;">
+                    &copy; 2026 <a href="admin.html" style="color: inherit; text-decoration: none; cursor: default;">AldoFerdii.</a> All Rights Reserved.
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 10px;">
+                    <span style="color: #64748b; font-size: 12px;">Verified Developer</span>
+                    <span style="color: #64748b; font-size: 12px;">Premium Quality</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="orderModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h3 style="color: var(--text-main); font-weight: 800;">Pilih Admin WA</h3>
+                <span style="cursor: pointer; color: var(--text-dim);" onclick="closeOrderModal()"><i data-lucide="x"></i></span>
+            </div>
+            
+            <a id="wa-admin-1" href="#" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--secondary-bg); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s;" class="admin-card">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                    <img src="kakangz.jpg" alt="Aldo Ferdiansyah" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="color: var(--text-main); margin-bottom: 2px; font-size: 14px;">Aldo Ferdiansyah</h4>
+                    <p style="font-size: 12px; color: var(--text-dim);">Admin 1</p>
+                </div>
+                <div style="background: #10b981; padding: 8px; border-radius: 50%; display: flex;"><i data-lucide="message-circle" size="18" color="white"></i></div>
+            </a>
+
+            <a id="wa-admin-2" href="#" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--secondary-bg); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s;" class="admin-card">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                    <img src="jekk.jpg" alt="M. Dzaki Naufalianto" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="color: var(--text-main); margin-bottom: 2px; font-size: 14px;">M. Dzaki Naufalianto</h4>
+                    <p style="font-size: 12px; color: var(--text-dim);">Admin 2</p>
+                </div>
+                <div style="background: #10b981; padding: 8px; border-radius: 50%; display: flex;"><i data-lucide="message-circle" size="18" color="white"></i></div>
+            </a>
+            <button class="btn-outline" style="width: 100%; margin-top: 10px; justify-content: center;" onclick="closeOrderModal()">Batal</button>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h3 style="color: var(--text-main); font-weight: 800;">Nomor Rekening</h3>
+                <span style="cursor: pointer; color: var(--text-dim);" onclick="closeModal()"><i data-lucide="x"></i></span>
+            </div>
+            <div class="account-item">
+                <span class="label">BRI</span>
+                <div class="number-row"><code>065001010250505</code><button onclick="copyText('065001010250505')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <div class="account-item">
+                <span class="label">BCA</span>
+                <div class="number-row"><code>7840465262</code><button onclick="copyText('7840465262')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <div class="account-item">
+                <span class="label">GOPAY / SHOPEEPAY</span>
+                <div class="number-row"><code>08975614300</code><button onclick="copyText('08975614300')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <p style="font-size: 11px; color: var(--text-dim); margin-top: 15px; text-align: center;">Atas Nama: <strong>Aldo Ferdiansyah</strong></p>
+            <button class="btn-primary" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+    
+    <div id="githubModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h3 style="color: var(--text-main); font-weight: 800;">Pilih GitHub</h3>
+                <span style="cursor: pointer; color: var(--text-dim);" onclick="closeGithubModal()"><i data-lucide="x"></i></span>
+            </div>
+            
+            <a href="https://github.com/AldoFerdiansyahh" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--secondary-bg); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s;" class="admin-card">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0; overflow: hidden;">
+                    <img src="kakangz.jpg" alt="Aldo" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="color: var(--text-main); margin-bottom: 2px; font-size: 14px;">Aldo Ferdiansyah</h4>
+                    <p style="font-size: 12px; color: var(--text-dim);">GitHub Profile</p>
+                </div>
+                <i data-lucide="external-link" size="18" color="var(--primary)"></i>
+            </a>
+
+            <a href="https://github.com/mdzakin26" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--secondary-bg); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s;" class="admin-card">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0; overflow: hidden;">
+                    <img src="jekk.jpg" alt="Dzaki" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="color: var(--text-main); margin-bottom: 2px; font-size: 14px;">M. Dzaki Naufalianto</h4>
+                    <p style="font-size: 12px; color: var(--text-dim);">GitHub Profile</p>
+                </div>
+                <i data-lucide="external-link" size="18" color="var(--primary)"></i>
+            </a>
+            <button class="btn-outline" style="width: 100%; margin-top: 10px; justify-content: center;" onclick="closeGithubModal()">Batal</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        /* FUNGSI KONTROL MODAL (POP-UP) */
+        window.openModal = () => document.getElementById('paymentModal').style.display = 'flex';
+        window.closeModal = () => document.getElementById('paymentModal').style.display = 'none';
+        
+        window.copyText = (text) => {
+            navigator.clipboard.writeText(text);
+            alert("Nomor rekening berhasil disalin!");
+        };
+
+        window.openOrderModal = (event, customText = '') => {
+            if(event) event.preventDefault();
+            const textParam = customText ? '?text=' + encodeURIComponent(customText) : '';
+            
+            document.getElementById('wa-admin-1').href = 'https://wa.me/628975614300' + textParam;
+            document.getElementById('wa-admin-2').href = 'https://wa.me/628985675158' + textParam; 
+            
+            document.getElementById('orderModal').style.display = 'flex';
+        };
+        window.closeOrderModal = () => document.getElementById('orderModal').style.display = 'none';
+        
+        window.openGithubModal = (event) => {
+            if(event) event.preventDefault();
+            document.getElementById('githubModal').style.display = 'flex';
+        };
+        window.closeGithubModal = () => document.getElementById('githubModal').style.display = 'none';
+    </script>
+</body>
+</html>

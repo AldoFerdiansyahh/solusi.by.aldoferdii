@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AldoFerdii Solusi | Jasa Tugas & IT Support</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #ffffff;
+            --secondary-bg: #f8fafc;
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --border: #e2e8f0;
+            --card: #ffffff;
+            --accent: #10b981;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 140px; 
+        }
+
+        /* --- FIX ICON HILANG DI HP (SAFARI/IOS BUG) --- */
+        svg { flex-shrink: 0 !important; }
+        .lucide { display: inline-block; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        .glass {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .badge {
+            background: #f1f5f9;
+            color: var(--text-main);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav.desktop-nav { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; color: var(--text-main); text-decoration: none; }
+        .logo span { color: var(--primary); }
+
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Sembunyikan nav-links di mobile */
+        @media (max-width: 767px) {
+            .nav-links { display: none; }
+        }
+
+        .hero { padding: 100px 0 60px; text-align: center; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1.1; margin: 24px 0; font-weight: 800; }
+        .hero p { color: var(--text-dim); max-width: 650px; margin: 0 auto 20px; font-size: 1.1rem; }
+
+        .btn-primary {
+            background: var(--text-main);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: #1e293b;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 18px 36px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover { background: var(--secondary-bg); border-color: var(--text-main); }
+
+        .tabs-header {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 40px;
+            justify-content: flex-start;
+            padding: 10px 5px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .tabs-header::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            white-space: nowrap;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .tab-btn.active { background: var(--text-main); color: white; border-color: var(--text-main); }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+
+        .service-card {
+            padding: 40px;
+            background: white;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 540px;
+        }
+
+        .service-card:hover { border-color: var(--primary); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .price-box { background: var(--secondary-bg); padding: 15px; border-radius: 14px; margin-bottom: 20px; }
+        .price-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+
+        /* Style Baru Dropdown Detail */
+        details {
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            background: var(--secondary-bg);
+        }
+        summary {
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::after { content: "▼"; font-size: 10px; transition: 0.3s; }
+        details[open] summary::after { transform: rotate(180deg); }
+        .detail-content {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 10px;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+        }
+        .detail-content ul { padding-left: 15px; }
+        .note-nego { font-size: 10px; color: var(--text-dim); font-style: italic; margin-top: 10px; text-align: center; }
+
+        .mobile-nav {
+            position: fixed; bottom: 20px; left: 10px; right: 10px; height: 75px;
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 1000; background: white; border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 20px;
+        }
+        .mobile-nav a { color: var(--text-dim); text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 10px; font-weight: 600; gap: 4px; }
+        .mobile-nav a.active { color: var(--primary); }
+
+        .footer-link { color: #94a3b8; text-decoration: none; font-size: 14px; transition: 0.3s; display: block; margin-bottom: 10px; }
+        .footer-link:hover { color: #ffffff; padding-left: 5px; }
+        .payment-badge { background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); }
+
+        @media (min-width: 768px) {
+            .mobile-nav { display: none; }
+            body { padding-bottom: 0; }
+            .tabs-header { justify-content: center; }
+            .tab-btn { font-size: 14px; padding: 12px 24px; }
+        }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
+        }
+        .modal-content { max-width: 400px; width: 100%; padding: 30px; animation: slideUp 0.3s ease-out; }
+        .account-item { margin-bottom: 15px; }
+        .account-item .label { font-size: 11px; font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
+        .number-row { display: flex; justify-content: space-between; align-items: center; background: var(--secondary-bg); padding: 10px 15px; border-radius: 10px; border: 1px solid var(--border); }
+        .number-row code { font-family: monospace; font-size: 14px; color: var(--text-main); }
+        .number-row button { background: none; border: none; cursor: pointer; color: var(--text-dim); transition: 0.3s; }
+        .number-row button:hover { color: var(--primary); }
+
+        /* Card untuk pilihan kontak Admin */
+        .admin-card:hover { border-color: var(--primary) !important; background: #f1f5f9 !important; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="desktop-nav">
+                <a href="#home" class="logo">Aldo<span>Ferdii.</span></a>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#layanan">Layanan</a>
+                    <a href="#testimoni">Testimoni</a>
+                    <a href="#" onclick="openOrderModal(event, 'Halo Kak, Saya ingin konsultasi mengenai tugas saya ke Aldoferdii.Solusi, Apakah Admin sedang Available?')">Konsultasi Gratis</a>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 11px; font-weight: 800; color: #10b981;">● ONLINE</span>
+                    <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="padding: 10px 18px; font-size: 13px; border-radius: 10px;">Order Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero" id="home">
+            <span class="badge">#1 Student Solutions in Bandung</span>
+            <h1>Tugas Beres, <br>Hati Teratasi.</h1>
+            <p>Jasa bantuan pengerjaan tugas dari tingkat sekolah (SMP & SMA/SMK), Kuliah, hingga penyelesaian tugas kantor. Ditangani langsung oleh mahasiswa Informatika berprestasi (IPK 3.87 & 3.8).</p>
+            <p>Dipercaya oleh 40+ klien dengan hasil yang memuaskan.</p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <a href="#layanan" class="btn-primary" style="text-decoration: none;">Lihat Layanan <i data-lucide="chevron-right"></i></a>
+                <a href="#" onclick="openOrderModal(event, 'Halo Kak, Saya ingin konsultasi mengenai tugas saya ke Aldoferdii.Solusi, Apakah Admin sedang Available?')" class="btn-outline" style="text-decoration: none;">Konsultasi Gratis</a>
+            </div>
+        </section>
+
+        <section id="layanan" style="padding: 60px 0;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <span class="badge" style="margin-bottom: 15px;">Pricing Policy</span>
+                <h2 style="font-size: 2.5rem; letter-spacing: -1px;">Pilih Layanan & Kecepatan</h2>
+            </div>
+
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="openTab(event, 'akademik')">Akademik & Sekolah</button>
+                <button class="tab-btn" onclick="openTab(event, 'it-support')">IT, Web & Data</button>
+                <button class="tab-btn" onclick="openTab(event, 'design')">Design & PPT</button>
+                <button class="tab-btn" onclick="openTab(event, 'jasa-ketik')">Jasa Ketik</button>
+                <button class="tab-btn" onclick="openTab(event, 'skripsi-penelitian')">Skripsi & Penelitian</button>
+                <button class="tab-btn" onclick="openTab(event, 'jaringan-informatika')">Jaringan & Informatika</button>
+                <button class="tab-btn" onclick="openTab(event, 'microsoft-office')">Microsoft Office</button>
+            </div>
+
+            <div id="akademik" class="tab-content active">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="book-marked" size="32" color="var(--primary)"></i>
+                                <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">FAVORIT</span>
+                            </div>
+                            <h3 style="margin: 15px 0 8px;">Tugas Harian & PR</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Matematika, Statistika, Rangkuman Materi.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (2-3 Hari):</strong> Rp 20.000 - Rp. 50.000</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 55.000 - Rp. 100.000</li>
+                                        <li>Cakupan: Tugas SMP/SMA/Kuliah, Soal Hitungan, Resume Buku.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order Now</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="scroll-text" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">Makalah & Laporan</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Laporan Praktikum, KTI, atau Makalah Kampus.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (3-5 Hari):</strong> Rp 75.000 - Rp. 150.000</li>
+                                        <li><strong>Express (24 Jam):</strong> Rp 150.000 - Rp. 300.000</li>
+                                        <li>Cakupan: Analisis Data, Daftar Pustaka Standar, Cek Typo, Struktur Rapi.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="it-support" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="code-2" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">Web & Coding Dasar</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">HTML, CSS, Laravel, Python, & SQL.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Coding Dasar (12-24 Jam):</strong> Rp 75.000 - Rp. 200.000</li>
+                                        <li><strong>Full Web Project (36 Jam):</strong> Rp 360.000 - Rp. 700.000</li>
+                                        <li>Cakupan: Debugging, Penjelasan Alur Kode, Full Responsif. *Diluar hosting</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="database" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">Olah Data & Excel</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Formula Excel, Pivot Table, & SQL Query.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (2-3 Hari):</strong> Rp 75.000 - Rp. 150.000</li>
+                                        <li><strong>Express (24 Jam):</strong> Rp 130.000 - Rp. 250.000</li>
+                                        <li>Cakupan: Grafik Otomatis, Dashboard, Olah Data Statistika.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="design" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="presentation" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">PPT Premium</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Desain Estetik, Infografis, & Animasi.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (1-2 Hari):</strong> Rp 5.000/Slide</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 10.000/Slide</li>
+                                        <li>Cakupan: Bonus File PDF, Link Canva, Slide ATM.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="palette" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">Poster, Flyer & CV ATS</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Poster Event, Flyer Promo & CV Profesional.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (1-2 Hari):</strong> Rp 50.000 - Rp. 75.000</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 90.000 - Rp. 180.000</li>
+                                        <li>Cakupan: High Res PNG/PDF, Revisi 2x, Layout Standar HRD (CV).</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai kesepakatan</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            <div id="jasa-ketik" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="keyboard" size="32" color="var(--primary)"></i>
+                                <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">FAST TYPING</span>
+                            </div>
+                            <h3 style="margin: 15px 0 8px;">Jasa Ketik Dokumen</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Pengetikan Makalah, Skripsi, & Modul Rapi.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (2-3 Hari):</strong> Rp 5.000 - Rp 10.000 / Lembar</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 15.000 - Rp 25.000 / Lembar</li>
+                                        <li>Cakupan: Setting Layout (Margin, Font), Penomoran Halaman, Daftar Isi Otomatis.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai jumlah halaman & negosiasi</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order Now</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="file-type-2" size="32" color="var(--primary)"></i>
+                                <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">DATA ENTRY</span>
+                            </div>
+                            <h3 style="margin: 15px 0 8px;">Salin & Transkrip Data</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Ubah PDF/Foto ke Word atau Transkrip Suara.</p>
+                            
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Reguler (2-3 Hari):</strong> Rp 35.000 - Rp 75.000</li>
+                                        <li><strong>Express (12-24 Jam):</strong> Rp 85.000 - Rp 150.000</li>
+                                        <li>Cakupan: Salin Tulisan Tangan ke Digital, Transkrip Audio Pendek, Input Data Tabel.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga bisa berubah sesuai tingkat kerumitan data</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="skripsi-penelitian" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="graduation-cap" size="32" color="var(--primary)"></i>
+                                <span class="badge" style="background:#eff6ff; color:#2563eb; border:none; font-size:10px;">POPULER</span>
+                            </div>
+                            <h3 style="margin: 15px 0 8px;">Pendampingan Skripsi & Proposal</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Penyusunan, perbaikan, dan pendampingan dokumen penelitian.</p>
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Konsultasi & Revisi (1-2 Hari):</strong> Rp 50.000 - Rp 150.000</li>
+                                        <li><strong>Pendampingan per BAB (3-7 Hari):</strong> Rp 150.000 - Rp 500.000</li>
+                                        <li>Cakupan: Proposal, BAB I-V, kerangka pemikiran, hipotesis, dan revisi pembimbing.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga menyesuaikan tingkat kesulitan dan jumlah revisi</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin konsultasi layanan Pendampingan Skripsi & Proposal di Aldoferdii.Solusi.')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Konsultasi Sekarang</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="chart-no-axes-combined" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">Kuesioner & Olah Data</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Penyusunan instrumen, tabulasi, dan interpretasi hasil penelitian.</p>
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Kuesioner & Google Form (1-2 Hari):</strong> Rp 75.000 - Rp 200.000</li>
+                                        <li><strong>Olah Data (2-4 Hari):</strong> Rp 150.000 - Rp 500.000</li>
+                                        <li>Cakupan: Uji validitas, reliabilitas, analisis deskriptif, regresi, dan interpretasi.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga menyesuaikan jumlah responden dan metode analisis</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order layanan Kuesioner & Olah Data di Aldoferdii.Solusi.')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="jaringan-informatika" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <i data-lucide="network" size="32" color="var(--primary)"></i>
+                                <span class="badge" style="background:#f0fdf4; color:#10b981; border:none; font-size:10px;">INFORMATIKA</span>
+                            </div>
+                            <h3 style="margin: 15px 0 8px;">Cisco, VLSM & Topologi</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Perancangan jaringan dan konfigurasi Cisco Packet Tracer.</p>
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Tugas Dasar (1-2 Hari):</strong> Rp 75.000 - Rp 200.000</li>
+                                        <li><strong>Project Jaringan (2-5 Hari):</strong> Rp 250.000 - Rp 700.000</li>
+                                        <li>Cakupan: Subnetting, VLSM, VLAN, routing, DHCP, topologi, dan dokumentasi.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga menyesuaikan jumlah perangkat dan kompleksitas konfigurasi</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order layanan Cisco, VLSM & Topologi di Aldoferdii.Solusi.')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="git-branch" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">UML, Flowchart & Dokumentasi</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Visualisasi alur sistem dan dokumentasi project Informatika.</p>
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Diagram Dasar (1-2 Hari):</strong> Rp 50.000 - Rp 150.000</li>
+                                        <li><strong>Dokumentasi Lengkap (2-4 Hari):</strong> Rp 200.000 - Rp 500.000</li>
+                                        <li>Cakupan: Flowchart, use case, activity, sequence, class diagram, dan penjelasan.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga menyesuaikan jumlah diagram dan detail sistem</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order layanan UML, Flowchart & Dokumentasi di Aldoferdii.Solusi.')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="microsoft-office" class="tab-content" style="display:none;">
+                <div class="grid-3">
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="file-text" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">Microsoft Word Profesional</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Perapihan dokumen akademik dan administrasi secara menyeluruh.</p>
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Dokumen Ringan (1 Hari):</strong> Rp 35.000 - Rp 100.000</li>
+                                        <li><strong>Dokumen Panjang (2-3 Hari):</strong> Rp 125.000 - Rp 300.000</li>
+                                        <li>Cakupan: Margin, heading, daftar isi, penomoran halaman, tabel, caption, dan daftar gambar.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga menyesuaikan jumlah halaman dan tingkat perapihan</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order layanan Microsoft Word Profesional di Aldoferdii.Solusi.')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+
+                    <div class="glass service-card">
+                        <div>
+                            <i data-lucide="sheet" size="32" color="var(--primary)"></i>
+                            <h3 style="margin: 15px 0 8px;">Excel & Dashboard</h3>
+                            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">Pengolahan tabel, rumus otomatis, grafik, dan dashboard.</p>
+                            <details>
+                                <summary>Klik rincian harga & waktu</summary>
+                                <div class="detail-content">
+                                    <ul>
+                                        <li><strong>Formula & Tabel (1-2 Hari):</strong> Rp 75.000 - Rp 200.000</li>
+                                        <li><strong>Dashboard Interaktif (2-4 Hari):</strong> Rp 250.000 - Rp 600.000</li>
+                                        <li>Cakupan: Lookup, pivot table, grafik, validasi data, dan laporan otomatis.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="note-nego">* Harga menyesuaikan jumlah data dan fitur yang dibutuhkan</div>
+                        <a href="#" onclick="openOrderModal(event, 'Halo Kak, saya ingin order layanan Excel & Dashboard di Aldoferdii.Solusi.')" class="btn-primary" style="justify-content:center; text-decoration:none; margin-top:10px;">Order via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <section id="keunggulan" style="padding: 80px 0; background: var(--secondary-bg);">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <span class="badge" style="margin-bottom: 15px;">Why Choose Us</span>
+                    <h2 style="font-size: 2.5rem; letter-spacing: -1.5px; color: var(--text-main);">Komitmen & Kualitas</h2>
+                    <p style="color: var(--text-dim);">Dikerjakan dengan standar akademik tinggi untuk hasil yang maksimal.</p>
+                </div>
+
+                <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                    <div class="glass" style="padding: 30px; text-align: center; border: none;">
+                        <div style="background: #f0fdf4; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <i data-lucide="clock" color="#10b981" size="28"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">On-Time Delivery</h4>
+                        <p style="font-size: 13px; color: var(--text-dim);">Disiplin waktu adalah kunci. Tugas dikirim sebelum deadline yang disepakati berakhir.</p>
+                    </div>
+
+                    <div class="glass" style="padding: 30px; text-align: center; border: none;">
+                        <div style="background: #fff7ed; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <i data-lucide="user-check" color="#f97316" size="28"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">Privasi Terjamin</h4>
+                        <p style="font-size: 13px; color: var(--text-dim);">Identitas klien dan detail tugas dijaga kerahasiaannya 100% aman.</p>
+                    </div>
+
+                    <div class="glass" style="padding: 30px; text-align: center; border: none;">
+                        <div style="background: #fdf2f8; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <i data-lucide="refresh-cw" color="#db2777" size="28"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">Gratis Revisi</h4>
+                        <p style="font-size: 13px; color: var(--text-dim);">Ada yang kurang pas? Tenang, ada jaminan revisi sampai sesuai dengan instruksi awal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+    <div class="mobile-nav">
+        <a href="#home" class="nav-item active"><i data-lucide="home" size="22"></i>Home</a>
+        <a href="#layanan" class="nav-item"><i data-lucide="layers" size="22"></i>Layanan</a>
+        <a href="#testimoni" class="nav-item"><i data-lucide="star" size="22"></i>Testimoni</a>
+        <a href="#" class="nav-item" onclick="openOrderModal(event, 'Halo Kak, Saya ingin konsultasi mengenai tugas saya ke Aldoferdii.Solusi, Apakah Admin sedang Available?')"><i data-lucide="message-circle" size="22"></i>Konsultasi</a>
+        <a href="#" class="nav-item" onclick="openOrderModal(event, 'Halo Kak, saya ingin order jasa bantu tugas Aldoferdii.Solusi. Apakah admin sedang available?')"><i data-lucide="send" size="22"></i>Order</a>
+    </div>
+
+    <section id="testimoni" style="padding: 80px 0; border-top: 1px solid var(--border); background: #ffffff;">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <span class="badge" style="margin-bottom: 15px;">Apa Kata Mereka</span>
+                    <h2 style="font-size: 2.5rem; letter-spacing: -1.5px;">Testimoni Klien</h2>
+                    <p style="color: var(--text-dim); font-size: 14px;">Bintang kamu sangat berarti bagi AldoFerdii Solusi.</p>
+                </div>
+
+                <div class="grid-3" style="margin-bottom: 50px;" id="testimonial-container">
+                    </div>
+
+                <div class="glass" style="max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 24px;">
+                    <h4 style="margin-bottom: 10px; text-align: center;">Beri Rating</h4>
+                    
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 25px;" id="star-rating">
+                        <i data-lucide="star" class="star-input" onclick="setRating(1)" style="cursor: pointer; color: #cbd5e1;" size="28"></i>
+                        <i data-lucide="star" class="star-input" onclick="setRating(2)" style="cursor: pointer; color: #cbd5e1;" size="28"></i>
+                        <i data-lucide="star" class="star-input" onclick="setRating(3)" style="cursor: pointer; color: #cbd5e1;" size="28"></i>
+                        <i data-lucide="star" class="star-input" onclick="setRating(4)" style="cursor: pointer; color: #cbd5e1;" size="28"></i>
+                        <i data-lucide="star" class="star-input" onclick="setRating(5)" style="cursor: pointer; color: #cbd5e1;" size="28"></i>
+                    </div>
+
+                    <form id="testimonialForm" onsubmit="handleSubmit(event)">
+                        <input type="hidden" id="selectedRating" value="0">
+                        
+                        <div style="margin-bottom: 15px;">
+                            <label style="font-size: 11px; font-weight: 800; color: var(--text-dim); display: block; margin-bottom: 5px; text-transform: uppercase;">Nama (Opsional)</label>
+                            <input type="text" id="clientName" placeholder="Tampil sebagai: A***" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); outline: none; font-size: 14px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <label style="font-size: 11px; font-weight: 800; color: var(--text-dim); display: block; margin-bottom: 5px; text-transform: uppercase;">Jenis Layanan</label>
+                            <select id="serviceType" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: white; outline: none; font-size: 14px; cursor: pointer;">
+                                <option value="Akademik & Sekolah">Akademik & Sekolah</option>
+                                <option value="IT, Web & Data">IT, Web & Data</option>
+                                <option value="Design & PPT">Design & PPT</option>
+                                <option value="Jasa Ketik">Jasa Ketik</option>
+                                <option value="Skripsi & Penelitian">Skripsi & Penelitian</option>
+                                <option value="Jaringan & Informatika">Jaringan & Informatika</option>
+                                <option value="Microsoft Office">Microsoft Office</option>
+                                <option value="Konsultasi & Revisi">Konsultasi & Revisi</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <label style="font-size: 11px; font-weight: 800; color: var(--text-dim); display: block; margin-bottom: 5px; text-transform: uppercase;">Kritik & Saran</label>
+                            <textarea id="clientComment" rows="3" placeholder="Apa yang kamu rasakan setelah order?" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); outline: none; font-size: 14px; resize: none;" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px;">Kirim Feedback</button>
+                    </form>
+                </div>
+            </div>
+    </section>
+
+    <footer style="background: #0f172a; color: #ffffff; padding: 100px 0 140px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
+                <div>
+                    <div class="logo" style="color: #ffffff; font-size: 26px; margin-bottom: 25px;">Aldo<span style="color: #3b82f6;">Ferdii.</span></div>
+                    <p style="color: #94a3b8; font-size: 14px; line-height: 1.8; margin-bottom: 25px;">
+                        Menyediakan layanan profesional dan terintegrasi untuk membantu pelajar, mahasiswa, hingga pekerja kantoran. Percayakan urusan tugas, desain, dan project IT kamu kepada tim AldoFerdii Solusi untuk hasil yang maksimal.
+                    </p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="https://instagram.com/solusi.by.aldoferdii" target="_blank" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>                        
+                        <a href="https://www.tiktok.com/@solusi.by.aldoferdii" target="_blank" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                        </a>
+                        <a href="#" onclick="openGithubModal(event)" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                        </a>
+                        <a href="mailto:solusi.by.aldoferdii@gmail.com" target="_blank" style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Keunggulan</h4>
+                    <ul style="list-style: none;">
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Hasil Rapi & Detail</li>
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Fast Response</li>
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Konsultasi 24/7 gratis!</li>
+                        <li style="display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 14px; margin-bottom: 12px;"><i data-lucide="check-circle" size="16" color="#3b82f6"></i> Aman & Terpercaya</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Navigasi</h4>
+                    <a href="#home" class="footer-link">Beranda</a>
+                    <a href="#layanan" class="footer-link">Layanan Unggulan</a>
+                    <a href="https://aldoferdiansyahh.github.io/Portfolio-AldoFerdii/" target="_blank" class="footer-link">Portfolio Aldo</a>
+                    <a href="https://mdzakin26.github.io/" target="_blank" class="footer-link">Portfolio Dzaki</a>
+                    <a href="#" onclick="openOrderModal(event, 'Halo Kak, Saya ingin konsultasi mengenai tugas saya ke Aldoferdii.Solusi, Apakah Admin sedang Available?')" class="footer-link">Hubungi Kami</a>
+                </div>
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">Pembayaran</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                        <span class="payment-badge" style="cursor: pointer;" onclick="openModal()">BRI</span>
+                        <span class="payment-badge" style="cursor: pointer;" onclick="openModal()">BCA</span>
+                        <span class="payment-badge" style="cursor: pointer;" onclick="openModal()">GOPAY</span>
+                        <span class="payment-badge" style="cursor: pointer;" onclick="openModal()">SHOPEEPAY</span>
+                    </div>
+                    <p style="font-size: 12px; color: #64748b;">Lokasi: Bandung, Jawa Barat</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                <p style="color: #64748b; font-size: 12px; font-weight: 600;">
+                    &copy; 2026 <a href="admin.html" style="color: inherit; text-decoration: none; cursor: default;">AldoFerdii.</a> All Rights Reserved.
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 10px;">
+                    <span style="color: #64748b; font-size: 12px;">Verified Developer</span>
+                    <span style="color: #64748b; font-size: 12px;">Premium Quality</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="orderModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h3 style="color: var(--text-main); font-weight: 800;">Pilih Admin WA</h3>
+                <span style="cursor: pointer; color: var(--text-dim);" onclick="closeOrderModal()"><i data-lucide="x"></i></span>
+            </div>
+            
+            <a id="wa-admin-1" href="#" target="_blank" onclick="trackWaAdmin('Aldo Ferdiansyah')" style="text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--secondary-bg); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s;" class="admin-card">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                    <img src="kakangz.jpg" alt="Aldo Ferdiansyah" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="color: var(--text-main); margin-bottom: 2px; font-size: 14px;">Aldo Ferdiansyah</h4>
+                    <p style="font-size: 12px; color: var(--text-dim);">Admin 1</p>
+                </div>
+                <div style="background: #10b981; padding: 8px; border-radius: 50%; display: flex;">
+                    <i data-lucide="message-circle" size="18" color="white"></i>
+                </div>
+            </a>
+
+            <a id="wa-admin-2" href="#" target="_blank" onclick="trackWaAdmin('M. Dzaki Naufalianto')" style="text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--secondary-bg); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s;" class="admin-card">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                    <img src="jekk.jpg" alt="M. Dzaki Naufalianto" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="color: var(--text-main); margin-bottom: 2px; font-size: 14px;">M. Dzaki Naufalianto</h4>
+                    <p style="font-size: 12px; color: var(--text-dim);">Admin 2</p>
+                </div>
+                <div style="background: #10b981; padding: 8px; border-radius: 50%; display: flex;">
+                    <i data-lucide="message-circle" size="18" color="white"></i>
+                </div>
+            </a>
+            
+            <button class="btn-outline" style="width: 100%; margin-top: 10px; justify-content: center;" onclick="closeOrderModal()">Batal</button>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h3 style="color: var(--text-main); font-weight: 800;">Nomor Rekening</h3>
+                <span style="cursor: pointer; color: var(--text-dim);" onclick="closeModal()"><i data-lucide="x"></i></span>
+            </div>
+            <div class="account-item">
+                <span class="label">BRI</span>
+                <div class="number-row"><code>065001010250505</code><button onclick="copyText('065001010250505')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <div class="account-item">
+                <span class="label">BCA</span>
+                <div class="number-row"><code>7840465262</code><button onclick="copyText('7840465262')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <div class="account-item">
+                <span class="label">GOPAY / SHOPEEPAY</span>
+                <div class="number-row"><code>08975614300</code><button onclick="copyText('08975614300')"><i data-lucide="copy" size="14"></i></button></div>
+            </div>
+            <p style="font-size: 11px; color: var(--text-dim); margin-top: 15px; text-align: center;">Atas Nama: <strong>Aldo Ferdiansyah</strong></p>
+            <button class="btn-primary" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+    
+    <div id="githubModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h3 style="color: var(--text-main); font-weight: 800;">Pilih GitHub</h3>
+                <span style="cursor: pointer; color: var(--text-dim);" onclick="closeGithubModal()"><i data-lucide="x"></i></span>
+            </div>
+            
+            <a href="https://github.com/AldoFerdiansyahh" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--secondary-bg); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s;" class="admin-card">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0; overflow: hidden;">
+                    <img src="kakangz.jpg" alt="Aldo" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="color: var(--text-main); margin-bottom: 2px; font-size: 14px;">Aldo Ferdiansyah</h4>
+                    <p style="font-size: 12px; color: var(--text-dim);">GitHub Profile</p>
+                </div>
+                <i data-lucide="external-link" size="18" color="var(--primary)"></i>
+            </a>
+
+            <a href="https://github.com/mdzakin26" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--secondary-bg); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s;" class="admin-card">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0; overflow: hidden;">
+                    <img src="jekk.jpg" alt="Dzaki" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="color: var(--text-main); margin-bottom: 2px; font-size: 14px;">M. Dzaki Naufalianto</h4>
+                    <p style="font-size: 12px; color: var(--text-dim);">GitHub Profile</p>
+                </div>
+                <i data-lucide="external-link" size="18" color="var(--primary)"></i>
+            </a>
+            
+            <button class="btn-outline" style="width: 100%; margin-top: 10px; justify-content: center;" onclick="closeGithubModal()">Batal</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        
+        // --- IMPOR ANALYTICS VERSI CDN ---
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSu2oC8NI8FY27gXeFlZxHgMqA5rH6C7I",
+            authDomain: "aldoferdii-solusi.firebaseapp.com",
+            projectId: "aldoferdii-solusi",
+            storageBucket: "aldoferdii-solusi.firebasestorage.app",
+            messagingSenderId: "358373993880",
+            appId: "1:358373993880:web:99c566a05efe454ee14fed",
+            measurementId: "G-ER9JSBLB6Q" // Kode Analytics barumu sudah terpasang
+        };
+
+        const app = initializeApp(firebaseConfig);
+        
+        // --- MENGAKTIFKAN ANALYTICS ---
+        const analytics = getAnalytics(app);
+
+        const db = getFirestore(app);
+        const testimonialCol = collection(db, "testimonials");
+
+        // TRACKER PENGUNJUNG LEBIH RAPI
+        const statsRef = doc(db, "analytics", "statistics");
+
+        function getTodayKey() {
+            return new Date().toISOString().slice(0, 10);
+        }
+
+        function getDeviceType() {
+            const ua = navigator.userAgent;
+            if (/Android|iPhone|iPad|iPod/i.test(ua)) return "Mobile";
+            return "Desktop";
+        }
+
+        function getBrowserName() {
+            const ua = navigator.userAgent;
+            if (ua.includes("Edg")) return "Microsoft Edge";
+            if (ua.includes("Chrome")) return "Chrome";
+            if (ua.includes("Firefox")) return "Firefox";
+            if (ua.includes("Safari")) return "Safari";
+            return "Unknown";
+        }
+
+        function getVisitorId() {
+            let visitorId = localStorage.getItem("af_visitor_id");
+            if (!visitorId) {
+                visitorId = crypto.randomUUID();
+                localStorage.setItem("af_visitor_id", visitorId);
+            }
+            return visitorId;
+        }
+
+        const trackVisitor = async () => {
+            const visitorId = getVisitorId();
+            const today = getTodayKey();
+
+            const hasCountedVisitor = localStorage.getItem("af_visitor_counted") === "yes";
+            const lastVisitDate = localStorage.getItem("af_last_visit_date");
+
+            const visitorData = {
+                visitorId,
+                page: location.pathname || "/",
+                fullUrl: location.href,
+                referrer: document.referrer || "Direct",
+                device: getDeviceType(),
+                browser: getBrowserName(),
+                platform: navigator.platform || "Unknown",
+                language: navigator.language || "Unknown",
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown",
+                screen: `${window.screen.width}x${window.screen.height}`,
+                updatedAt: serverTimestamp()
+            };
+
+            try {
+                // Simpan data visitor terakhir
+                await setDoc(doc(db, "visitors", visitorId), {
+                    ...visitorData,
+                    firstSeenAt: serverTimestamp()
+                }, { merge: true });
+
+                // Simpan log kunjungan
+                await addDoc(collection(db, "visitor_logs"), {
+                    ...visitorData,
+                    createdAt: serverTimestamp()
+                });
+
+                // Total pengunjung unik per browser/perangkat
+                if (!hasCountedVisitor) {
+                    await setDoc(statsRef, {
+                        visitors: increment(1),
+                        wa_clicks: increment(0),
+                        updatedAt: serverTimestamp()
+                    }, { merge: true });
+
+                    localStorage.setItem("af_visitor_counted", "yes");
+                }
+
+                // Statistik harian
+                if (lastVisitDate !== today) {
+                    await setDoc(doc(db, "analytics_daily", today), {
+                        date: today,
+                        visitors: increment(1),
+                        wa_clicks: increment(0),
+                        updatedAt: serverTimestamp()
+                    }, { merge: true });
+
+                    localStorage.setItem("af_last_visit_date", today);
+                }
+
+                // Event ke Google Analytics
+                logEvent(analytics, "visitor_open_site", {
+                    page_path: location.pathname || "/",
+                    device_type: getDeviceType()
+                });
+
+            } catch (error) {
+                console.error("Gagal tracking visitor:", error);
+            }
+        };
+
+        trackVisitor(); 
+
+        window.openTab = (evt, tabName) => {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        };
+
+        window.openModal = () => document.getElementById('paymentModal').style.display = 'flex';
+        window.closeModal = () => document.getElementById('paymentModal').style.display = 'none';
+        window.copyText = (text) => {
+            navigator.clipboard.writeText(text);
+            alert("Nomor rekening berhasil disalin!");
+        };
+
+        window.openOrderModal = async (event, customText = '') => {
+            if(event) event.preventDefault();
+            const textParam = customText ? '?text=' + encodeURIComponent(customText) : '';
+            
+            document.getElementById('wa-admin-1').href = 'https://wa.me/628975614300' + textParam;
+            document.getElementById('wa-admin-2').href = 'https://wa.me/628985675158' + textParam; 
+            
+            document.getElementById('orderModal').style.display = 'flex';
+
+            try {
+                await updateDoc(statsRef, { wa_clicks: increment(1) });
+            } catch (e) {
+                console.log("Analytics belum siap");
+            }
+        };
+        window.closeOrderModal = () => document.getElementById('orderModal').style.display = 'none';
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.mobile-nav .nav-item');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        let currentRating = 0;
+        window.setRating = (n) => {
+            currentRating = n;
+            document.getElementById('selectedRating').value = n;
+            const stars = document.querySelectorAll('.star-input');
+            stars.forEach((star, index) => {
+                if (index < n) {
+                    star.style.color = '#fbbf24';
+                    star.setAttribute('fill', 'currentColor');
+                } else {
+                    star.style.color = '#cbd5e1';
+                    star.removeAttribute('fill');
+                }
+            });
+        };
+
+        window.handleSubmit = async (event) => {
+            event.preventDefault();
+            const rating = parseInt(document.getElementById('selectedRating').value);
+            const nameInput = document.getElementById('clientName').value;
+            const service = document.getElementById('serviceType').value;
+            const comment = document.getElementById('clientComment').value;
+
+            if (rating === 0) {
+                alert("Bintangnya belum diklik nih Kak");
+                return;
+            }
+
+            try {
+                await addDoc(testimonialCol, {
+                    name: nameInput || "Seseorang",
+                    service: service,
+                    comment: comment,
+                    rating: rating,
+                    createdAt: serverTimestamp()
+                });
+                document.getElementById('testimonialForm').reset();
+                window.setRating(0);
+                alert("Terima Kasih banyak atas Penilaiannya, Semoga Harimu menyenangkan!");
+            } catch (e) {
+                console.error("Gagal simpan: ", e);
+                alert("Ada masalah koneksi ke Firebase.");
+            }
+        };
+
+        const q = query(testimonialCol, orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const container = document.getElementById('testimonial-container');
+            container.innerHTML = ''; 
+
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const finalName = data.name !== "Seseorang" ? data.name.charAt(0).toUpperCase() + "***" : "Seseorang";
+                
+                let starsHTML = '';
+                for(let i=0; i<5; i++) {
+                    const color = i < data.rating ? '#fbbf24' : '#cbd5e1';
+                    const fill = i < data.rating ? 'fill="currentColor"' : '';
+                    starsHTML += `<i data-lucide="star" ${fill} style="color: ${color};" size="12"></i>`;
+                }
+
+                const card = `
+                    <div class="glass" style="padding: 25px; border-radius: 20px;">
+                        <div style="display: flex; gap: 3px; margin-bottom: 15px;">${starsHTML}</div>
+                        <p style="font-size: 14px; color: var(--text-main); font-style: italic; margin-bottom: 15px;">"${data.comment}"</p>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 35px; height: 35px; background: var(--secondary-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; color: var(--primary);">${finalName.charAt(0)}</div>
+                            <div>
+                                <h5 style="font-size: 13px;">${finalName} (Disamarkan)</h5>
+                                <p style="font-size: 11px; color: var(--text-dim);">${data.service}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', card);
+            });
+            lucide.createIcons(); 
+        });
+
+        window.openGithubModal = (event) => {
+            if(event) event.preventDefault();
+            document.getElementById('githubModal').style.display = 'flex';
+        };
+        window.closeGithubModal = () => document.getElementById('githubModal').style.display = 'none';
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons({ attrs: { 'stroke-width': 2 } });
+        });
+    </script>
+</body>
+</html>

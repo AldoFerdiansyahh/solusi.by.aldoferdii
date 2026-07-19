@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced SEO Analyzer | Admin Area</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --border: #e2e8f0;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        header { padding: 20px 0; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; color: var(--text-main); text-decoration: none; }
+        .logo span { color: var(--primary); }
+        .admin-badge { background: #eff6ff; color: var(--primary); padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 800; border: 1px solid #bfdbfe; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        
+        #auth-loading { display: flex; align-items: center; justify-content: center; min-height: 70vh; font-weight: 600; color: var(--text-dim); }
+        #seo-screen { display: none; }
+
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .page-title h1 { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+
+        .seo-grid { display: grid; grid-template-columns: 1.9fr 1.1fr; gap: 24px; }
+        @media (max-width: 900px) { .seo-grid { grid-template-columns: 1fr; } }
+
+        /* Google Snippet Box Style */
+        .google-preview-box { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 25px; max-width: 600px;}
+        .google-url { font-size: 12px; color: #202124; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+        .google-title { font-size: 20px; color: #1a0dab; font-weight: 400; font-family: arial, sans-serif; line-height: 1.3; margin-bottom: 4px; cursor: pointer; word-wrap: break-word; }
+        .google-title:hover { text-decoration: underline; }
+        .google-desc { font-size: 14px; color: #4d5156; font-family: arial, sans-serif; line-height: 1.58; word-wrap: break-word; }
+
+        .btn { padding: 12px 24px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; border: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-decoration: none; }
+        .btn-outline { background: white; border: 1px solid var(--border); color: var(--text-main); }
+        .btn-outline:hover { background: #f1f5f9; }
+
+        label { font-size: 13px; font-weight: 700; color: var(--text-dim); display: block; margin-bottom: 8px; }
+        input, textarea { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; outline: none; transition: 0.3s; font-size: 14px; background: #f8fafc; line-height: 1.6; }
+        input:focus, textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.05); }
+
+        /* Perbaikan Layout Panel Audit */
+        .audit-panel { display: flex; flex-direction: column; max-height: calc(100vh - 100px); }
+        #seo-results { list-style: none; padding-bottom: 15px; overflow-y: auto; flex-grow: 1; margin-bottom: 15px; padding-right: 10px; }
+        
+        #seo-results::-webkit-scrollbar { width: 6px; }
+        #seo-results::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        .stats-wrapper { border-top: 1px solid var(--border); padding-top: 15px; flex-shrink: 0; }
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
+        .stat-box { background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+        .stat-num { font-size: 18px; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-top: 4px; }
+        .stat-title { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="admin.html" class="logo">Aldo<span>Ferdii.</span> <span class="admin-badge">PRO SEO ENGINE</span></a>
+            <a href="admin.html" class="btn btn-outline" style="padding: 8px 16px; font-size: 12px;">
+                <i data-lucide="arrow-left" size="14"></i> Dashboard
+            </a>
+        </div>
+    </header>
+
+    <div id="auth-loading">
+        <p>Memverifikasi enkripsi sesi keamanan...</p>
+    </div>
+
+    <div id="seo-screen" class="container">
+        <div class="page-header">
+            <div class="page-title">
+                <h1>SEO Content Analyzer</h1>
+                <p style="color: var(--text-dim);">Sistem optimalisasi arsitektur teks dan meta data artikel.</p>
+            </div>
+        </div>
+
+        <div class="seo-grid">
+            <!-- Workspace Editor -->
+            <div class="glass" style="padding: 30px;">
+                <!-- Google Snippet Preview Section -->
+                <label style="margin-bottom: 10px;">Google Search Snippet Preview</label>
+                <div class="google-preview-box">
+                    <div class="google-url">
+                        <!-- ID ditambahkan di sini agar bisa diubah JS -->
+                        <span id="preview-url">https://www.nama-website-anda.com</span>
+                        <span style="color:#70757a; font-size:10px;">▼</span>
+                    </div>
+                    <div id="preview-title" class="google-title">Silakan Masukkan Judul...</div>
+                    <div id="preview-desc" class="google-desc">Tulis deskripsi halaman unik Anda untuk memicu impresi klik dari calon klien melalui pencarian mesin pintar Google.</div>
+                </div>
+
+                <!-- KOLOM INPUT BARU UNTUK URL -->
+                <div>
+                    <label>URL Website (Untuk Preview)</label>
+                    <input type="text" id="seo-url" placeholder="Contoh: https://tokosolusi.com">
+                </div>
+
+                <div>
+                    <label>Focus Keyword Utama</label>
+                    <input type="text" id="seo-keyword" placeholder="Contoh: Jasa SEO Profesional">
+                </div>
+                
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <label>SEO Title Tag</label>
+                        <span id="title-counter" style="font-size: 12px; font-weight: 600;">0/60</span>
+                    </div>
+                    <input type="text" id="seo-title" placeholder="Judul utama artikel penarik impresi klik">
+                    <div style="height: 4px; background: #e2e8f0; border-radius: 2px; margin-top: -15px; margin-bottom: 20px; overflow: hidden;">
+                        <div id="title-bar" style="height: 100%; width: 0%; background: var(--danger); transition: 0.3s;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <label>Meta Description</label>
+                        <span id="desc-counter" style="font-size: 12px; font-weight: 600;">0/155</span>
+                    </div>
+                    <textarea id="seo-desc" rows="3" placeholder="Ringkasan konten halaman persuasif maksimal 155 karakter..."></textarea>
+                    <div style="height: 4px; background: #e2e8f0; border-radius: 2px; margin-top: -15px; margin-bottom: 20px; overflow: hidden;">
+                        <div id="desc-bar" style="height: 100%; width: 0%; background: var(--danger); transition: 0.3s;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <label>Struktur Artikel / Kode HTML Konten</label>
+                    <textarea id="seo-content" rows="15" placeholder="Tulis teks narasi atau rekatkan langsung blok kode HTML artikel Anda di sini..."></textarea>
+                </div>
+            </div>
+
+            <!-- Panel Audit Indikator -->
+            <div class="glass audit-panel" style="padding: 25px; align-self: start; position: sticky; top: 100px;">
+                <h3 style="font-weight: 800; font-size: 16px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                    <i data-lucide="shield-check" size="18" style="color: var(--primary);"></i> Matriks Yoast Audit
+                </h3>
+                
+                <ul id="seo-results"></ul>
+
+                <div class="stats-wrapper">
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-title">Kata</span>
+                            <span id="word-count" class="stat-num">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-title">Densitas</span>
+                            <span id="keyword-density" class="stat-num">0%</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-title">Gambar</span>
+                            <span id="image-count" class="stat-num">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-row" style="margin-top: 10px; display: block;">
+                        <div class="stat-box" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding: 12px 15px;">
+                            <span class="stat-title" style="margin-top:0;">Tautan (Internal / Eksternal)</span>
+                            <span id="link-count" class="stat-num" style="font-size:14px; margin-top:0;">0 / 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Firebase Auth -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSu2oC8NI8FY27gXeFlZxHgMqA5rH6C7I",
+            authDomain: "aldoferdii-solusi.firebaseapp.com",
+            projectId: "aldoferdii-solusi",
+            storageBucket: "aldoferdii-solusi.firebasestorage.app",
+            messagingSenderId: "358373993880",
+            appId: "1:358373993880:web:99c566a05efe454ee14fed"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('auth-loading').style.display = 'none';
+                document.getElementById('seo-screen').style.display = 'block';
+            } else {
+                window.location.href = "admin.html";
+            }
+        });
+    </script>
+    
+    <!-- Script Engine SEO -->
+    <script src="assets/js/seo-engine.js"></script>
+</body>
+</html>
